@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
 Disallow: /verify/
-
-Sitemap: https://www.artoistechnologyltd.com/sitemap.xml

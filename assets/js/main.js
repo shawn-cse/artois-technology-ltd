@@ -1,93 +1,83 @@
-(() => {
-  const body = document.body;
-  const menuButton = document.querySelector('[data-menu-toggle]');
-  const menu = document.querySelector('[data-menu]');
 
-  if (menuButton && menu) {
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector("[data-menu-toggle]");
+  const menu = document.querySelector("[data-menu]");
+
+  if (toggle && menu) {
     const closeMenu = () => {
-      menu.classList.remove('open');
-      menuButton.setAttribute('aria-expanded', 'false');
-      body.classList.remove('menu-open');
+      toggle.classList.remove("open");
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
     };
 
-    menuButton.addEventListener('click', () => {
-      const open = menuButton.getAttribute('aria-expanded') === 'true';
-      menuButton.setAttribute('aria-expanded', String(!open));
-      menu.classList.toggle('open', !open);
-      body.classList.toggle('menu-open', !open);
+    toggle.addEventListener("click", () => {
+      const open = !menu.classList.contains("open");
+      toggle.classList.toggle("open", open);
+      menu.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("menu-open", open);
     });
 
-    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 1040) closeMenu();
-    });
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeMenu();
-    });
+    menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+    window.addEventListener("resize", () => { if (window.innerWidth > 1050) closeMenu(); });
   }
 
-  const revealElements = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const observer = new IntersectionObserver((entries, instance) => {
+  const reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          instance.unobserve(entry.target);
+          entry.target.classList.add("is-visible");
+          obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
-    revealElements.forEach((element) => observer.observe(element));
+    }, { threshold: 0.13, rootMargin: "0px 0px -30px" });
+    reveals.forEach((el) => observer.observe(el));
   } else {
-    revealElements.forEach((element) => element.classList.add('is-visible'));
+    reveals.forEach((el) => el.classList.add("is-visible"));
   }
 
-  document.querySelectorAll('.faq-item').forEach((item) => {
-    const button = item.querySelector('.faq-question');
-    if (!button) return;
-    button.addEventListener('click', () => {
-      const willOpen = !item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach((openItem) => {
-        if (openItem !== item) {
-          openItem.classList.remove('open');
-          openItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
-        }
+  document.querySelectorAll(".faq-question").forEach((button) => {
+    button.addEventListener("click", () => {
+      const item = button.closest(".faq-item");
+      const wasOpen = item.classList.contains("open");
+      document.querySelectorAll(".faq-item.open").forEach((openItem) => {
+        openItem.classList.remove("open");
+        const openButton = openItem.querySelector(".faq-question");
+        if (openButton) openButton.setAttribute("aria-expanded", "false");
       });
-      item.classList.toggle('open', willOpen);
-      button.setAttribute('aria-expanded', String(willOpen));
+      if (!wasOpen) {
+        item.classList.add("open");
+        button.setAttribute("aria-expanded", "true");
+      }
     });
   });
 
-  const projectForm = document.querySelector('[data-project-form]');
+  const projectForm = document.querySelector("[data-project-form]");
   if (projectForm) {
-    projectForm.addEventListener('submit', (event) => {
+    const status = projectForm.querySelector("[data-form-status]");
+    projectForm.addEventListener("submit", (event) => {
       event.preventDefault();
-      const status = projectForm.querySelector('[data-form-status]');
-      if (!projectForm.checkValidity()) {
-        projectForm.reportValidity();
-        return;
-      }
+      if (!projectForm.reportValidity()) return;
       const data = new FormData(projectForm);
-      const subject = `Project enquiry from ${data.get('name') || 'website visitor'}`;
-      const body = [
-        `Name: ${data.get('name') || ''}`,
-        `Email: ${data.get('email') || ''}`,
-        `Company: ${data.get('company') || ''}`,
-        `Phone: ${data.get('phone') || ''}`,
-        `Primary need: ${data.get('service') || ''}`,
-        `Preferred timing: ${data.get('timeline') || ''}`,
-        '',
-        'Project context:',
-        `${data.get('message') || ''}`
-      ].join('\n');
-      if (status) {
-        status.textContent = 'Opening your email application with the completed project brief…';
-        status.style.color = '#167a59';
-      }
-      window.location.href = `mailto:info@artoistechnologyltd.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const subject = encodeURIComponent(`Project enquiry — ${data.get("name") || "Website visitor"}`);
+      const body = encodeURIComponent([
+        `Name: ${data.get("name") || ""}`,
+        `Email: ${data.get("email") || ""}`,
+        `Company: ${data.get("company") || ""}`,
+        `Service: ${data.get("service") || ""}`,
+        `Budget: ${data.get("budget") || ""}`,
+        "",
+        "Project details:",
+        data.get("message") || ""
+      ].join("\n"));
+      status.className = "form-status success";
+      status.textContent = "Your email application will open with the project details.";
+      window.location.href = `mailto:info@artoistechnologyltd.com?subject=${subject}&body=${body}`;
     });
   }
 
-  document.querySelectorAll('[data-year]').forEach((node) => {
-    node.textContent = new Date().getFullYear();
-  });
-})();
+  const year = document.querySelector("[data-year]");
+  if (year) year.textContent = new Date().getFullYear();
+});

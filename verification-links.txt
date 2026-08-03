@@ -1,14 +1,10 @@
-PRIVATE INTERNSHIP VERIFICATION LINKS
-=====================================
+Replace YOUR-REPOSITORY-NAME with the exact GitHub repository name.
 
-These records are intentionally not linked from the public website or sitemap.
-Replace https://www.artoistechnologyltd.com with your final domain if needed.
+Homepage
+https://iamsohan100.github.io/YOUR-REPOSITORY-NAME/
 
-Shawn
-https://www.artoistechnologyltd.com/verify/shawn-vrf-7k2m9q4x-31d8c5p6-n0r4t7w2-l6b9e3s8/
+Shawn verification
+https://iamsohan100.github.io/YOUR-REPOSITORY-NAME/verify/shawn-vfy-7q2m4x9c-81p6r3nk-5t0d2w8b-l4h7s1je/
 
-Addin
-https://www.artoistechnologyltd.com/verify/addin-vrf-4p8x2n7q-65m1c9r3-t7w0k4d6-j2s8b5v1/
-
-IMPORTANT
-These are unlisted links, not password-protected links. Anyone who has the URL or QR code can view the record.
+Addin verification
+https://iamsohan100.github.io/YOUR-REPOSITORY-NAME/verify/addin-vfy-4n8k1z6q-73c5m2rt-9p0w4x7d-b6j3h8sf/

@@ -1,25 +1,56 @@
-# Artois Technology Limited — Professional Multipage Website
+# Artois Technology Limited — GitHub Pages Static Website
 
-A responsive static website with consistent typography, semantic HTML, accessible navigation and motion that respects reduced-motion preferences.
+This is a fully static website built with HTML, CSS and JavaScript. It does not require Node.js, PHP, a database or a build command.
 
-## Public pages
+## Correct repository structure
 
-- `index.html`
-- `about.html`
-- `services.html`
-- `process.html`
-- `faq.html`
-- `start-project.html`
-- `404.html`
+Upload the **contents of this folder** to the repository root. Do not upload only the ZIP file and do not place everything inside another nested folder.
 
-## Private verification records
+```text
+index.html
+about.html
+services.html
+process.html
+faq.html
+start-project.html
+404.html
+.nojekyll
+robots.txt
+assets/
+verify/
+```
 
-The two unlisted records are inside `verify/`. Their complete production URLs are saved in `verification-links.txt`.
+## Publish with GitHub Pages
 
-These pages include `noindex` metadata, are excluded from `sitemap.xml`, are disallowed in `robots.txt`, and are not linked from any public page. This makes them unlisted, not access-controlled. Anyone with the full URL or QR code can view them.
+1. Create or open a public GitHub repository.
+2. Extract the ZIP on your computer.
+3. Upload every file and folder from inside the extracted folder to the repository root.
+4. Commit the files to the `main` branch.
+5. Open **Settings → Pages**.
+6. Under **Build and deployment**, choose **Deploy from a branch**.
+7. Select branch `main` and folder `/(root)`, then save.
+8. Wait a few minutes for the Pages URL to become active.
 
-## Deployment
+## Private verification folders
 
-Upload the complete folder contents to the web root for `https://www.artoistechnologyltd.com/`. Keep the directory names unchanged so the QR-code URLs continue to work.
+Shawn:
 
-The Start a Project form works without a backend by opening the visitor's default email application with the completed brief addressed to `info@artoistechnologyltd.com`.
+```text
+verify/shawn-vfy-7q2m4x9c-81p6r3nk-5t0d2w8b-l4h7s1je/
+```
+
+Addin:
+
+```text
+verify/addin-vfy-4n8k1z6q-73c5m2rt-9p0w4x7d-b6j3h8sf/
+```
+
+These pages are unlisted and marked `noindex`, but they are not password protected. Anyone with the exact URL or QR code can open them.
+
+## Important
+
+All links are relative, so the website works under a GitHub project URL such as:
+
+```text
+https://iamsohan100.github.io/REPOSITORY-NAME/
+```
