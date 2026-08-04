@@ -1,0 +1,17 @@
+ARTOIS TECHNOLOGY LIMITED — FINAL DEPLOYMENT CHECKLIST
+
+1. Upload every file and folder in this package directly to the GitHub repository root.
+2. GitHub Pages source: main branch, /(root).
+3. GitHub Pages custom domain: www.artoistechnologyltd.com
+4. The repository root CNAME file must contain: www.artoistechnologyltd.com
+5. Enable Enforce HTTPS after DNS verification succeeds.
+6. Configure artoistechnologyltd.com to redirect to https://www.artoistechnologyltd.com/
+
+OFFICIAL WEBSITE
+https://www.artoistechnologyltd.com/
+
+SHAWN VERIFICATION
+https://www.artoistechnologyltd.com/verify/shawn-vfy-7q2m4x9c-81p6r3nk-5t0d2w8b-l4h7s1je/
+
+ADDIN VERIFICATION
+https://www.artoistechnologyltd.com/verify/addin-vfy-4n8k1z6q-73c5m2rt-9p0w4x7d-b6j3h8sf/

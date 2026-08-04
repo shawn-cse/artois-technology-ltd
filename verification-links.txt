@@ -1,10 +1,10 @@
-Replace YOUR-REPOSITORY-NAME with the exact GitHub repository name.
+Artois Technology Limited — Verification Links
 
-Homepage
-https://iamsohan100.github.io/YOUR-REPOSITORY-NAME/
+Official website
+https://www.artoistechnologyltd.com/
 
 Shawn verification
-https://iamsohan100.github.io/YOUR-REPOSITORY-NAME/verify/shawn-vfy-7q2m4x9c-81p6r3nk-5t0d2w8b-l4h7s1je/
+https://www.artoistechnologyltd.com/verify/shawn-vfy-7q2m4x9c-81p6r3nk-5t0d2w8b-l4h7s1je/
 
 Addin verification
-https://iamsohan100.github.io/YOUR-REPOSITORY-NAME/verify/addin-vfy-4n8k1z6q-73c5m2rt-9p0w4x7d-b6j3h8sf/
+https://www.artoistechnologyltd.com/verify/addin-vfy-4n8k1z6q-73c5m2rt-9p0w4x7d-b6j3h8sf/
