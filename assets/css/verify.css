@@ -230,14 +230,20 @@ body::before {
 .record-item strong {
   display: block;
   margin-top: 7px;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  word-break: break-all;
+  font-size: clamp(0.88rem, 1.8vw, 0.95rem);
+  line-height: 1.45;
+  word-break: normal;
   overflow-wrap: break-word;
+  hyphens: none;
   color: var(--ink);
 }
 .record-item.full {
   grid-column: 1 / -1;
+}
+.record-item.token strong,
+.record-item.hash strong {
+  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 .verified-badge {
@@ -280,13 +286,19 @@ body::before {
 }
 
 @media (max-width: 640px) {
-  .verify-shell { border-radius: 22px; padding: 24px; }
+  .verify-shell { border-radius: 22px; padding: clamp(16px, 4vw, 24px); }
   .verify-top { align-items: flex-start; }
   .secure { display: none; }
-  .record { grid-template-columns: 1fr; }
+  .record { grid-template-columns: 1fr; gap: 10px; }
+  .record-item { padding: 14px 16px; }
   .brand-copy strong { font-size: 0.92rem; }
   .brand-copy span { font-size: 0.5rem; }
   .profile-frame { width: 120px; height: 120px; }
+}
+
+@media (max-width: 420px) {
+  .record-item { padding: 12px 14px; }
+  .record-item strong { font-size: 0.86rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
