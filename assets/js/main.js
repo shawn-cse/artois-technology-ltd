@@ -1,32 +1,75 @@
 /**
- * Artois Technology Limited — Official Enterprise Interactive Scripts
+ * Artois Technology Limited — Official Corporate Interactive Scripts
  * Pure vanilla JavaScript, zero dependencies, accessible and performant.
+ * Optimized for static GitHub Pages deployment.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Mobile Navigation Toggle
+  // 1. Header Scroll Elevation State
+  const siteHeader = document.querySelector(".site-header");
+  if (siteHeader) {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        siteHeader.classList.add("scrolled");
+      } else {
+        siteHeader.classList.remove("scrolled");
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+  }
+
+  // 2. Mobile Navigation Drawer & Backdrop Controller
   const toggle = document.querySelector("[data-menu-toggle]");
   const menu = document.querySelector("[data-menu]");
 
+  // Ensure backdrop exists
+  let backdrop = document.querySelector(".menu-backdrop");
+  if (!backdrop) {
+    backdrop = document.createElement("div");
+    backdrop.className = "menu-backdrop";
+    document.body.appendChild(backdrop);
+  }
+
   if (toggle && menu) {
+    const openMenu = () => {
+      toggle.classList.add("open");
+      menu.classList.add("open");
+      backdrop.classList.add("open");
+      toggle.setAttribute("aria-expanded", "true");
+      document.body.classList.add("menu-open");
+    };
+
     const closeMenu = () => {
       toggle.classList.remove("open");
       menu.classList.remove("open");
+      backdrop.classList.remove("open");
       toggle.setAttribute("aria-expanded", "false");
       document.body.classList.remove("menu-open");
     };
 
     toggle.addEventListener("click", () => {
       const isOpen = menu.classList.contains("open");
-      toggle.classList.toggle("open", !isOpen);
-      menu.classList.toggle("open", !isOpen);
-      toggle.setAttribute("aria-expanded", String(!isOpen));
-      document.body.classList.toggle("menu-open", !isOpen);
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
+
+    // Close on backdrop click
+    backdrop.addEventListener("click", closeMenu);
 
     // Close on navigation link click
     menu.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", closeMenu);
+    });
+
+    // Close on keyboard ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menu.classList.contains("open")) {
+        closeMenu();
+      }
     });
 
     // Close on viewport resize past tablet breakpoint
@@ -35,37 +78,51 @@ document.addEventListener("DOMContentLoaded", () => {
         closeMenu();
       }
     });
-
-    // Close on click outside
-    document.addEventListener("click", (e) => {
-      if (menu.classList.contains("open") && !menu.contains(e.target) && !toggle.contains(e.target)) {
-        closeMenu();
-      }
-    });
   }
 
-  // 2. Interactive Command Center Dashboard Tabs (Hero Visual)
+  // 3. Interactive Command Center Dashboard Tabs (Hero Visual)
   const ccTabs = document.querySelectorAll("[data-cc-tab]");
-  const ccPanels = document.querySelectorAll("[data-cc-panel]");
+  const ccPanels = document.querySelectorAll(".cc-panel, [data-cc-panel]");
 
-  if (ccTabs.length > 0 && ccPanels.length > 0) {
+  if (ccTabs.length > 0) {
     ccTabs.forEach((tab) => {
       tab.addEventListener("click", () => {
         const targetPanelId = tab.getAttribute("data-cc-tab");
 
-        ccTabs.forEach((t) => t.classList.remove("active"));
-        ccPanels.forEach((p) => p.classList.remove("active"));
+        // Deactivate all tabs
+        ccTabs.forEach((t) => {
+          t.classList.remove("active");
+          t.setAttribute("aria-selected", "false");
+        });
 
+        // Deactivate all panels
+        ccPanels.forEach((p) => {
+          p.classList.remove("active");
+        });
+
+        // Activate clicked tab
         tab.classList.add("active");
+        tab.setAttribute("aria-selected", "true");
+
+        // Activate corresponding panel
         const activePanel = document.getElementById(targetPanelId);
         if (activePanel) {
           activePanel.classList.add("active");
+
+          // Re-trigger bar animation if panel has telemetry bars
+          const bars = activePanel.querySelectorAll(".telemetry-bars i");
+          bars.forEach((bar) => {
+            bar.style.animation = "none";
+            // Trigger reflow
+            void bar.offsetWidth;
+            bar.style.animation = "";
+          });
         }
       });
     });
   }
 
-  // 3. Scroll Reveal Observer
+  // 4. Scroll Reveal Observer with Graceful Fallback
   const reveals = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
     const revealObserver = new IntersectionObserver(
@@ -78,18 +135,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       },
       {
-        threshold: 0.12,
-        rootMargin: "0px 0px -40px 0px",
+        threshold: 0.08,
+        rootMargin: "0px 0px -30px 0px",
       }
     );
 
     reveals.forEach((el) => revealObserver.observe(el));
   } else {
-    // Fallback for environments without IntersectionObserver
     reveals.forEach((el) => el.classList.add("is-visible"));
   }
 
-  // 4. Accessible FAQ Accordions
+  // 5. Accessible FAQ Accordions
   const faqItems = document.querySelectorAll(".faq-item");
   faqItems.forEach((item) => {
     const questionBtn = item.querySelector(".faq-question");
@@ -98,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     questionBtn.addEventListener("click", () => {
       const isOpen = item.classList.contains("open");
 
-      // Optional single-open accordion behavior:
+      // Optional single-open accordion behavior
       faqItems.forEach((other) => {
         if (other !== item) {
           other.classList.remove("open");
@@ -117,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 5. FAQ Category Filter Tabs
+  // 6. FAQ Category Filter Tabs
   const faqFilterBtns = document.querySelectorAll("[data-faq-filter]");
   if (faqFilterBtns.length > 0) {
     faqFilterBtns.forEach((btn) => {
@@ -130,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
         faqItems.forEach((item) => {
           const itemCategory = item.getAttribute("data-category");
           if (filter === "all" || itemCategory === filter) {
-            item.style.display = "block";
+            item.style.display = "";
           } else {
             item.style.display = "none";
           }
@@ -139,9 +195,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 6. Enterprise Project Intake Form Submission (Mailto Preparation)
+  // 7. Project Intake Form & URL Query Pre-fill Support
   const projectForm = document.querySelector("[data-project-form]");
   if (projectForm) {
+    // Check for ?service= parameter in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceParam = urlParams.get("service");
+    const serviceSelect = projectForm.querySelector('select[name="service"]');
+
+    if (serviceParam && serviceSelect) {
+      // Find matching option (case-insensitive substring)
+      const options = Array.from(serviceSelect.options);
+      const match = options.find((opt) =>
+        opt.value.toLowerCase().includes(serviceParam.toLowerCase())
+      );
+      if (match) {
+        serviceSelect.value = match.value;
+      }
+    }
+
     const statusMsg = projectForm.querySelector("[data-form-status]");
 
     projectForm.addEventListener("submit", (e) => {
@@ -157,39 +229,41 @@ document.addEventListener("DOMContentLoaded", () => {
       const timeline = formData.get("timeline") || "Flexible";
       const budget = formData.get("budget") || "To be discussed";
       const message = formData.get("message") || "";
-      const ndaRequested = formData.get("nda_requested") ? "Yes (Please send Mutual NDA first)" : "No";
+      const ndaRequested = formData.get("nda_requested")
+        ? "Yes (Please provide Mutual NDA)"
+        : "No";
 
       const subject = encodeURIComponent(`New Project Inquiry — ${name} [${company}]`);
 
       const emailBody = encodeURIComponent(
         `Dear Artois Technology Limited Team,\n\n` +
-        `I would like to discuss a project with Artois Technology Limited.\n\n` +
-        `--- MY DETAILS ---\n` +
+        `I would like to inquire about starting a project with Artois Technology Limited.\n\n` +
+        `--- CLIENT INFORMATION ---\n` +
         `Full Name: ${name}\n` +
-        `Email Address: ${email}\n` +
-        `Company / Business: ${company}\n\n` +
-        `--- PROJECT DETAILS ---\n` +
-        `Service Needed: ${service}\n` +
-        `Estimated Timeline: ${timeline}\n` +
+        `Email: ${email}\n` +
+        `Company / Organization: ${company}\n\n` +
+        `--- PROJECT REQUIREMENTS ---\n` +
+        `Selected Service: ${service}\n` +
+        `Target Timeline: ${timeline}\n` +
         `Estimated Budget: ${budget}\n` +
-        `NDA Requested: ${ndaRequested}\n\n` +
-        `--- PROJECT DESCRIPTION ---\n` +
+        `Mutual NDA Requested: ${ndaRequested}\n\n` +
+        `--- PROJECT DESCRIPTION & GOALS ---\n` +
         `${message}\n\n` +
-        `Looking forward to hearing from your team.\n\n` +
+        `Looking forward to receiving your technical feedback and estimate.\n\n` +
         `Best regards,\n` +
         `${name}`
       );
 
       if (statusMsg) {
         statusMsg.className = "form-status success";
-        statusMsg.textContent = "Opening your email app to send your project details...";
+        statusMsg.textContent = "Opening your email app to transmit your inquiry to info@artoistechnologyltd.com...";
       }
 
       window.location.href = `mailto:info@artoistechnologyltd.com?subject=${subject}&body=${emailBody}`;
     });
   }
 
-  // 7. Dynamic Year in Footer
+  // 8. Dynamic Copyright Year
   const yearEls = document.querySelectorAll("[data-year]");
   const currentYear = new Date().getFullYear();
   yearEls.forEach((el) => {
