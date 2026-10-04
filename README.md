@@ -25,6 +25,10 @@ https://www.artoistechnologyltd.com/verify/shawn-vfy-7q2m4x9c-81p6r3nk-5t0d2w8b-
 
 https://www.artoistechnologyltd.com/verify/addin-vfy-4n8k1z6q-73c5m2rt-9p0w4x7d-b6j3h8sf/
 
+### Kollol Dey
+
+https://www.artoistechnologyltd.com/verify/kallol-vfy-5p9d2w8x-31m7k4rb-8t0s6q1h-v4j8e2ld/
+
 > These verification pages are unlisted and excluded from normal website navigation and search indexing. Anyone who has the complete URL or QR code can still access them.
 
 ## Technology
@@ -62,7 +66,9 @@ https://www.artoistechnologyltd.com/verify/addin-vfy-4n8k1z6q-73c5m2rt-9p0w4x7d-
 │   ├── index.html
 │   ├── shawn-vfy-7q2m4x9c-81p6r3nk-5t0d2w8b-l4h7s1je/
 │   │   └── index.html
-│   └── addin-vfy-4n8k1z6q-73c5m2rt-9p0w4x7d-b6j3h8sf/
+│   ├── addin-vfy-4n8k1z6q-73c5m2rt-9p0w4x7d-b6j3h8sf/
+│   │   └── index.html
+│   └── kallol-vfy-5p9d2w8x-31m7k4rb-8t0s6q1h-v4j8e2ld/
 │       └── index.html
 └── assets/
     ├── css/
