@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0e7ff"/>
+      <stop offset="100%" stop-color="#c7d2fe"/>
+    </linearGradient>
+    <linearGradient id="avatarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="suitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Circle -->
+  <rect width="160" height="160" rx="80" fill="url(#bgGrad)"/>
+
+  <!-- Male Avatar Silhouette -->
+  <!-- Shoulders / Suit -->
+  <path d="M28 148 C 30 118, 52 108, 80 108 C 108 108, 130 118, 132 148 Z" fill="url(#suitGrad)"/>
+  
+  <!-- Shirt Collar / Tie Accent -->
+  <polygon points="80,118 70,108 90,108" fill="#ffffff" opacity="0.95"/>
+  <polygon points="80,136 75,116 85,116" fill="url(#avatarGrad)"/>
+
+  <!-- Neck -->
+  <rect x="71" y="86" width="18" height="24" rx="4" fill="url(#skinGrad)"/>
+
+  <!-- Head / Face -->
+  <ellipse cx="80" cy="68" rx="28" ry="32" fill="url(#skinGrad)"/>
+
+  <!-- Male Hair (Modern Short Haircut) -->
+  <path d="M52 64 C 52 42, 60 36, 80 36 C 100 36, 108 42, 108 64 C 108 67, 104 56, 96 52 C 86 48, 70 50, 60 56 C 54 60, 52 64, 52 64 Z" fill="#1e293b"/>
+  
+  <!-- Sideburns -->
+  <path d="M52 62 L 55 74 L 59 72 L 56 60 Z" fill="#1e293b"/>
+  <path d="M108 62 L 105 74 L 101 72 L 104 60 Z" fill="#1e293b"/>
+
+  <!-- Subtle Eyes & Eyebrows Hint -->
+  <path d="M64 62 Q 70 60 74 62" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M86 62 Q 90 60 96 62" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <circle cx="69" cy="68" r="2.2" fill="#475569"/>
+  <circle cx="91" cy="68" r="2.2" fill="#475569"/>
+
+  <!-- Subtle Smile -->
+  <path d="M74 84 Q 80 88 86 84" stroke="#64748b" stroke-width="2" stroke-linecap="round" fill="none"/>
+</svg>
