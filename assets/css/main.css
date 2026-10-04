@@ -3521,6 +3521,67 @@ p {
   margin-bottom: 18px;
 }
 
+/* Checklist in Responsibility and Requirement Cards */
+.careers-checklist,
+.carrier-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.careers-checklist li,
+.carrier-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ink-800);
+}
+
+.careers-checklist li svg,
+.carrier-checklist li svg {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+  color: var(--brand);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.careers-checklist li span,
+.carrier-checklist li span {
+  flex: 1;
+}
+
+.careers-checklist li strong,
+.carrier-checklist li strong {
+  color: var(--ink-900);
+}
+
+/* Thematic checkmark colors for responsibility cards */
+.careers-resp-card:nth-child(1) .careers-checklist li svg {
+  color: var(--brand);
+}
+
+.careers-resp-card:nth-child(2) .careers-checklist li svg {
+  color: #0891b2;
+}
+
+.careers-resp-card:nth-child(3) .careers-checklist li svg {
+  color: #059669;
+}
+
+.careers-resp-card:nth-child(4) .careers-checklist li svg {
+  color: #7c3aed;
+}
+
 /* Requirements 2-Column Split */
 .careers-req-split {
   display: grid;
