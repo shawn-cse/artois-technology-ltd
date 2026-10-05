@@ -29,6 +29,10 @@ https://www.artoistechnologyltd.com/verify/addin-vfy-4n8k1z6q-73c5m2rt-9p0w4x7d-
 
 https://www.artoistechnologyltd.com/verify/kallol-vfy-5p9d2w8x-31m7k4rb-8t0s6q1h-v4j8e2ld/
 
+### Obaidul Hasan Shakib
+
+https://www.artoistechnologyltd.com/verify/shakib-vfy-8k2n9m4r-52t6w1qb-7p0v3x8e-j4h8s2ld/
+
 > These verification pages are unlisted and excluded from normal website navigation and search indexing. Anyone who has the complete URL or QR code can still access them.
 
 ## Technology
@@ -68,7 +72,9 @@ https://www.artoistechnologyltd.com/verify/kallol-vfy-5p9d2w8x-31m7k4rb-8t0s6q1h
 │   │   └── index.html
 │   ├── addin-vfy-4n8k1z6q-73c5m2rt-9p0w4x7d-b6j3h8sf/
 │   │   └── index.html
-│   └── kallol-vfy-5p9d2w8x-31m7k4rb-8t0s6q1h-v4j8e2ld/
+│   ├── kallol-vfy-5p9d2w8x-31m7k4rb-8t0s6q1h-v4j8e2ld/
+│   │   └── index.html
+│   └── shakib-vfy-8k2n9m4r-52t6w1qb-7p0v3x8e-j4h8s2ld/
 │       └── index.html
 └── assets/
     ├── css/
