@@ -35,4 +35,50 @@
     <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+<<<<<<< HEAD
+=======
+  </url>
+  <url>
+    <loc>https://www.artoistechnologyltd.com/carrier/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.artoistechnologyltd.com/start-project/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.artoistechnologyltd.com/verify/shawn-vfy-7q2m4x9c-81p6r3nk-5t0d2w8b-l4h7s1je/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.artoistechnologyltd.com/verify/addin-vfy-4n8k1z6q-73c5m2rt-9p0w4x7d-b6j3h8sf/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.artoistechnologyltd.com/verify/kallol-vfy-5p9d2w8x-31m7k4rb-8t0s6q1h-v4j8e2ld/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.artoistechnologyltd.com/verify/shakib-vfy-8k2n9m4r-52t6w1qb-7p0v3x8e-j4h8s2ld/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.artoistechnologyltd.com/verify/arafat-vfy-3b7k9w2t-61m5p8rc-4v0j2q9h-d8n3e7sl/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+>>>>>>> addin-website-edits
 </urlset>
