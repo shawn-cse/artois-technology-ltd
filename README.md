@@ -13,7 +13,7 @@ A fully static, responsive, multi-page corporate website for **Artois Technology
 - Services: https://www.artoistechnologyltd.com/services/
 - Process: https://www.artoistechnologyltd.com/process/
 - FAQ: https://www.artoistechnologyltd.com/faq/
-- Start a Project: https://www.artoistechnologyltd.com/start-project/
+- Careers: https://www.artoistechnologyltd.com/careers/
 
 ## Internship Verification Links
 
