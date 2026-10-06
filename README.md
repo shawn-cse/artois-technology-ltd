@@ -33,6 +33,10 @@ https://www.artoistechnologyltd.com/verify/kallol-vfy-5p9d2w8x-31m7k4rb-8t0s6q1h
 
 https://www.artoistechnologyltd.com/verify/shakib-vfy-8k2n9m4r-52t6w1qb-7p0v3x8e-j4h8s2ld/
 
+### Arafat Islam
+
+https://www.artoistechnologyltd.com/verify/arafat-vfy-3b7k9w2t-61m5p8rc-4v0j2q9h-d8n3e7sl/
+
 > These verification pages are unlisted and excluded from normal website navigation and search indexing. Anyone who has the complete URL or QR code can still access them.
 
 ## Technology
@@ -74,7 +78,9 @@ https://www.artoistechnologyltd.com/verify/shakib-vfy-8k2n9m4r-52t6w1qb-7p0v3x8e
 │   │   └── index.html
 │   ├── kallol-vfy-5p9d2w8x-31m7k4rb-8t0s6q1h-v4j8e2ld/
 │   │   └── index.html
-│   └── shakib-vfy-8k2n9m4r-52t6w1qb-7p0v3x8e-j4h8s2ld/
+│   ├── shakib-vfy-8k2n9m4r-52t6w1qb-7p0v3x8e-j4h8s2ld/
+│   │   └── index.html
+│   └── arafat-vfy-3b7k9w2t-61m5p8rc-4v0j2q9h-d8n3e7sl/
 │       └── index.html
 └── assets/
     ├── css/
