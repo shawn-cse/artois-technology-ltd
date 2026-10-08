@@ -2156,11 +2156,12 @@ p {
   position: relative;
 }
 
-.footer-top-grid {
+.footer-top-grid,
+.footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1.15fr 1.15fr;
-  gap: clamp(28px, 3.5vw, 48px);
-  padding-bottom: 44px;
+  grid-template-columns: 1.35fr 0.9fr 1.1fr 1.25fr;
+  gap: clamp(24px, 3.2vw, 44px);
+  padding-bottom: 40px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -2413,7 +2414,8 @@ p {
     position: static;
   }
 
-  .footer-top-grid {
+  .footer-top-grid,
+  .footer-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 36px;
   }
@@ -2497,7 +2499,8 @@ p {
     font-size: 1.2rem;
   }
 
-  .footer-top-grid {
+  .footer-top-grid,
+  .footer-grid {
     grid-template-columns: 1fr;
     gap: 32px;
   }
@@ -4025,6 +4028,577 @@ p {
   font-size: 0.85rem;
   line-height: 1.5;
   color: var(--ink-800);
+}
+
+/* --------------------------------------------------------------------------
+   25. PAYMENT & VERIFICATION SYSTEM (SIDE-BY-SIDE EXECUTIVE DESIGN)
+   -------------------------------------------------------------------------- */
+.payment-hero {
+  padding-block: clamp(24px, 3.2vw, 36px);
+  background: 
+    radial-gradient(ellipse at 90% 10%, rgba(226, 19, 110, 0.06), transparent 45%),
+    linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.payment-hero h1 {
+  font-size: clamp(1.4rem, 2.8vw, 1.95rem);
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+
+.payment-hero p.lead {
+  font-size: 0.95rem;
+  margin-bottom: 0;
+  max-width: 760px;
+}
+
+.payment-hero .breadcrumb {
+  margin-bottom: 10px;
+}
+
+.payment-section {
+  padding-block: clamp(26px, 3.5vw, 42px);
+  background: var(--bg-subtle);
+}
+
+.payment-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.08fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.payment-card {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(20px, 3vw, 30px);
+  transition: border-color var(--duration-fast);
+}
+
+.payment-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.payment-card-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink-950);
+  margin: 0;
+}
+
+.payment-card-desc {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.bkash-brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bkash-header-logo {
+  height: 34px;
+  width: auto;
+  max-width: 145px;
+  object-fit: contain;
+  display: block;
+}
+
+.bkash-sub-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #c40f5f;
+  background: #fdf2f8;
+  border: 1px solid #fbcfe8;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.payment-method-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fdf2f8;
+  color: #e2136e;
+  border: 1px solid #fbcfe8;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.payment-method-badge .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #e2136e;
+}
+
+.payment-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.payment-info-item {
+  padding: 13px 15px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.payment-info-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.payment-info-item .info-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.payment-info-item .info-val {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--ink-950);
+  line-height: 1.2;
+}
+
+.payment-number-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.payment-number-display {
+  font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+  font-weight: 800;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color: var(--ink-950);
+  letter-spacing: 0.03em;
+}
+
+.btn-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 7px 15px;
+  background: #ffffff;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xs);
+  color: var(--ink-800);
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease);
+  box-shadow: var(--shadow-xs);
+  white-space: nowrap;
+}
+
+.btn-copy:hover {
+  background: var(--bg-subtle);
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+.btn-copy.copied {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #065f46;
+}
+
+.btn-copy svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.payment-instructions-box {
+  background: #f8fafc;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-top: 12px;
+}
+
+.payment-instructions-box h3 {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--ink-900);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.payment-instructions-box h3 svg {
+  color: var(--brand);
+  flex-shrink: 0;
+}
+
+.payment-steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.payment-steps-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: var(--ink-800);
+  line-height: 1.45;
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: var(--ink-900);
+  font-size: 0.72rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.payment-note {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-strong);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.payment-support-mini {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.payment-support-mini a {
+  color: var(--brand);
+  font-weight: 600;
+}
+
+/* Radio Button Cards for Fee Type */
+.fee-type-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.fee-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.fee-radio-card {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fee-radio-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fee-radio-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #ffffff;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-fast) var(--ease);
+  gap: 8px;
+}
+
+.fee-radio-card:hover .fee-radio-content {
+  border-color: #f472b6;
+  background: #fff7fa;
+}
+
+.fee-radio-card input[type="radio"]:checked + .fee-radio-content {
+  border-color: #e2136e;
+  background: #fdf2f8;
+  box-shadow: 0 0 0 2px rgba(226, 19, 110, 0.15);
+}
+
+.fee-radio-info {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.fee-radio-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--border-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color var(--duration-fast);
+}
+
+.fee-radio-card input[type="radio"]:checked + .fee-radio-content .fee-radio-dot {
+  border-color: #e2136e;
+}
+
+.fee-radio-dot::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e2136e;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all var(--duration-fast) var(--ease);
+}
+
+.fee-radio-card input[type="radio"]:checked + .fee-radio-content .fee-radio-dot::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fee-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink-950);
+  line-height: 1.25;
+}
+
+.fee-badge {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #c40f5f;
+  background: #ffffff;
+  border: 1px solid #fbcfe8;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+/* Button Confirm Payment - bKash pink */
+.btn-bkash {
+  background: #e2136e;
+  background: linear-gradient(135deg, #e2136e 0%, #c40f5f 100%);
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(226, 19, 110, 0.32);
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 24px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all var(--duration-fast) var(--ease);
+}
+
+.btn-bkash:hover {
+  background: linear-gradient(135deg, #c40f5f 0%, #a80b51 100%);
+  box-shadow: 0 8px 24px rgba(226, 19, 110, 0.45);
+  transform: translateY(-2px);
+  color: #ffffff !important;
+}
+
+.btn-bkash:active {
+  transform: translateY(0);
+}
+
+.btn-bkash:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Fixed Amount Display in Verification Form */
+.fixed-amount-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xs);
+  gap: 12px;
+}
+
+.fixed-amount-val {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--ink-950);
+}
+
+.fixed-amount-badge {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Inline Validation States */
+.field-error {
+  display: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #dc2626;
+  margin-top: 3px;
+}
+
+.field-error.active {
+  display: block;
+}
+
+.form-input.input-error {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}
+
+.form-helper {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+/* Form Error Banner */
+.form-error-alert {
+  padding: 12px 16px;
+  border-radius: var(--radius-xs);
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: none;
+  line-height: 1.45;
+}
+
+/* Success Card */
+.payment-success-card {
+  text-align: center;
+  padding: clamp(32px, 4.5vw, 48px) clamp(20px, 3.5vw, 32px);
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.payment-success-card .success-icon-wrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #10b981;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.payment-success-card h2 {
+  font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+  font-weight: 800;
+  color: var(--ink-950);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.payment-success-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 480px;
+  margin: 0 auto 24px;
+  line-height: 1.55;
+}
+
+/* Responsive side-by-side collapses on tablet/mobile */
+@media (max-width: 960px) {
+  .payment-container {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 580px) {
+  .payment-info-grid {
+    grid-template-columns: 1fr;
+  }
+  .fee-options-grid {
+    grid-template-columns: 1fr;
+  }
+  .payment-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .payment-number-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .btn-copy {
+    width: 100%;
+  }
 }
 
 /* Reduced Motion Accessibility */

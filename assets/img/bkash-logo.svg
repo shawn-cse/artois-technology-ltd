@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168 46" width="168" height="46" fill="none">
+  <!-- bKash Iconic Origami Bird Symbol -->
+  <g id="bkash-bird" transform="translate(2, 3)">
+    <!-- Back Wing Tip -->
+    <polygon points="16,2 26,13 14,14" fill="#E2136E" />
+    <!-- Head and Beak -->
+    <polygon points="34,7 39,14 30,15" fill="#C40F5F" />
+    <!-- Upper Body / Chest -->
+    <polygon points="34,7 30,15 25,11" fill="#E2136E" />
+    <!-- Center Fold -->
+    <polygon points="25,11 30,15 23,24 14,14" fill="#D81368" />
+    <!-- Forward Breast -->
+    <polygon points="30,15 37,21 27,24" fill="#F43F8C" />
+    <!-- Belly Underfold -->
+    <polygon points="27,24 23,24 25,29" fill="#B30C55" />
+    <!-- Upper Tail -->
+    <polygon points="14,14 23,24 5,30" fill="#E2136E" />
+    <!-- Lower Tail Tip -->
+    <polygon points="5,30 23,24 11,37" fill="#C40F5F" />
+  </g>
+  <!-- bKash Brand Typography -->
+  <text x="49" y="31" font-family="'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="800" fill="#E2136E" letter-spacing="-0.8">bKash</text>
+</svg>
+

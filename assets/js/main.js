@@ -269,4 +269,220 @@ document.addEventListener("DOMContentLoaded", () => {
   yearEls.forEach((el) => {
     el.textContent = String(currentYear);
   });
+
+  // 9. Payment Page: bKash Copy and Verification Form
+  const copyBkashBtn = document.getElementById("copy-bkash-btn");
+  if (copyBkashBtn) {
+    const rawNumber = "01568924935";
+    let copyTimer = null;
+
+    copyBkashBtn.addEventListener("click", async () => {
+      let success = false;
+
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(rawNumber);
+          success = true;
+        } catch (e) {
+          success = false;
+        }
+      }
+
+      if (!success) {
+        // Fallback for mobile webviews or non-secure contexts
+        try {
+          const tempInput = document.createElement("input");
+          tempInput.setAttribute("type", "text");
+          tempInput.setAttribute("value", rawNumber);
+          tempInput.style.position = "fixed";
+          tempInput.style.top = "-9999px";
+          tempInput.style.left = "-9999px";
+          document.body.appendChild(tempInput);
+          tempInput.focus();
+          tempInput.select();
+          tempInput.setSelectionRange(0, 99999);
+          success = document.execCommand("copy");
+          document.body.removeChild(tempInput);
+        } catch (err) {
+          success = false;
+        }
+      }
+
+      const label = copyBkashBtn.querySelector(".copy-btn-text") || copyBkashBtn;
+      if (success) {
+        clearTimeout(copyTimer);
+        label.textContent = "Copied!";
+        copyBkashBtn.classList.add("copied");
+        copyTimer = setTimeout(() => {
+          label.textContent = "Copy";
+          copyBkashBtn.classList.remove("copied");
+        }, 2000);
+      } else {
+        // Graceful fallback prompt
+        window.prompt("Copy bKash Number:", rawNumber);
+      }
+    });
+  }
+
+  const paymentForm = document.getElementById("payment-form");
+  if (paymentForm) {
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const bkashInput = document.getElementById("bkash_number");
+    const trxidInput = document.getElementById("trxid");
+
+    const errorName = document.getElementById("error-name");
+    const errorEmail = document.getElementById("error-email");
+    const errorBkash = document.getElementById("error-bkash_number");
+    const errorTrxid = document.getElementById("error-trxid");
+
+    const formErrorAlert = document.getElementById("form-error-alert");
+    const submitBtn = document.getElementById("submit-btn");
+    const formCard = document.getElementById("payment-form-card");
+    const successCard = document.getElementById("payment-success");
+
+    const showError = (input, errorEl, message) => {
+      if (input) input.classList.add("input-error");
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.classList.add("active");
+      }
+    };
+
+    const clearError = (input, errorEl) => {
+      if (input) input.classList.remove("input-error");
+      if (errorEl) {
+        errorEl.textContent = "";
+        errorEl.classList.remove("active");
+      }
+    };
+
+    // Real-time error clearing on input
+    [
+      [nameInput, errorName],
+      [emailInput, errorEmail],
+      [bkashInput, errorBkash],
+      [trxidInput, errorTrxid],
+    ].forEach(([input, errorEl]) => {
+      if (input) {
+        input.addEventListener("input", () => {
+          clearError(input, errorEl);
+          if (formErrorAlert) formErrorAlert.style.display = "none";
+        });
+      }
+    });
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    paymentForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (formErrorAlert) {
+        formErrorAlert.style.display = "none";
+        formErrorAlert.textContent = "";
+      }
+
+      let isValid = true;
+      let firstInvalid = null;
+
+      // 1. Full Name check
+      const nameVal = nameInput ? nameInput.value.trim() : "";
+      if (!nameVal) {
+        showError(nameInput, errorName, "Please enter your full name.");
+        isValid = false;
+        if (!firstInvalid) firstInvalid = nameInput;
+      } else {
+        clearError(nameInput, errorName);
+      }
+
+      // 2. Email Address check
+      const emailVal = emailInput ? emailInput.value.trim() : "";
+      if (!emailVal) {
+        showError(emailInput, errorEmail, "Please enter your email address.");
+        isValid = false;
+        if (!firstInvalid) firstInvalid = emailInput;
+      } else if (!emailRegex.test(emailVal)) {
+        showError(emailInput, errorEmail, "Please enter a valid email address (e.g. name@example.com).");
+        isValid = false;
+        if (!firstInvalid) firstInvalid = emailInput;
+      } else {
+        clearError(emailInput, errorEmail);
+      }
+
+      // 3. Sender bKash Number check (exactly 11 digits, numeric only)
+      const bkashVal = bkashInput ? bkashInput.value.trim() : "";
+      if (!bkashVal) {
+        showError(bkashInput, errorBkash, "Please enter your sender bKash number.");
+        isValid = false;
+        if (!firstInvalid) firstInvalid = bkashInput;
+      } else if (/\D/.test(bkashVal)) {
+        showError(bkashInput, errorBkash, "Only numeric digits are allowed (no spaces, dashes, or +880).");
+        isValid = false;
+        if (!firstInvalid) firstInvalid = bkashInput;
+      } else if (bkashVal.length !== 11) {
+        showError(bkashInput, errorBkash, `bKash number must contain exactly 11 digits (you entered ${bkashVal.length} digits).`);
+        isValid = false;
+        if (!firstInvalid) firstInvalid = bkashInput;
+      } else if (!bkashVal.startsWith("01")) {
+        showError(bkashInput, errorBkash, "bKash number must start with 01 (e.g. 01712345678).");
+        isValid = false;
+        if (!firstInvalid) firstInvalid = bkashInput;
+      } else {
+        clearError(bkashInput, errorBkash);
+      }
+
+      // 4. Transaction ID check
+      const trxidVal = trxidInput ? trxidInput.value.trim() : "";
+      if (!trxidVal) {
+        showError(trxidInput, errorTrxid, "Please enter your bKash Transaction ID (TrxID).");
+        isValid = false;
+        if (!firstInvalid) firstInvalid = trxidInput;
+      } else {
+        clearError(trxidInput, errorTrxid);
+      }
+
+      if (!isValid) {
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      // Submit directly to Formspree endpoint via POST
+      const originalBtnHtml = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>Submitting...</span>`;
+
+      try {
+        const formData = new FormData(paymentForm);
+        const response = await fetch(paymentForm.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            "Accept": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          if (formCard) formCard.style.display = "none";
+          if (successCard) {
+            successCard.style.display = "block";
+            successCard.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        } else {
+          if (formErrorAlert) {
+            formErrorAlert.textContent = "We could not submit your payment details. Please check your information and try again.";
+            formErrorAlert.style.display = "block";
+          }
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHtml;
+        }
+      } catch (err) {
+        if (formErrorAlert) {
+          formErrorAlert.textContent = "We could not submit your payment details. Please check your information and try again.";
+          formErrorAlert.style.display = "block";
+        }
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHtml;
+      }
+    });
+  }
 });
