@@ -80,5 +80,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
->>>>>>> addin-website-edits
+  <url>
+    <loc>https://www.artoistechnologyltd.com/verify/mahmudul-vfy-6m2p9w4t-74n1k8rc-5v0j3q7h-e9s2b6ld/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
