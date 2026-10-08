@@ -13,6 +13,7 @@
   --brand: #2563eb;
   --brand-hover: #1d4ed8;
   --brand-active: #1e40af;
+  --brand-dark: #1e3a8a;
   --brand-light: #3b82f6;
   --brand-subtle: #eff6ff;
   --brand-border: #bfdbfe;
@@ -4033,6 +4034,57 @@ p {
 /* --------------------------------------------------------------------------
    25. PAYMENT & VERIFICATION SYSTEM (SIDE-BY-SIDE EXECUTIVE DESIGN)
    -------------------------------------------------------------------------- */
+
+/* Payment Method Dynamic Theme Variables */
+.payment-section,
+.payment-section[data-payment-theme="bkash"] {
+  --method-primary: #e2136e;
+  --method-primary-hover: #c40f5f;
+  --method-primary-dark: #a80b51;
+  --method-gradient: linear-gradient(135deg, #e2136e 0%, #c40f5f 100%);
+  --method-gradient-hover: linear-gradient(135deg, #c40f5f 0%, #a80b51 100%);
+  --method-glow: rgba(226, 19, 110, 0.32);
+  --method-glow-strong: rgba(226, 19, 110, 0.45);
+  --method-bg-light: #fdf2f8;
+  --method-border-light: #fbcfe8;
+  --method-border-focus: rgba(226, 19, 110, 0.2);
+  --method-text-accent: #c40f5f;
+  --method-hover-border: #f472b6;
+  --method-hover-bg: #fff7fa;
+}
+
+.payment-section[data-payment-theme="nagad"] {
+  --method-primary: #f37021;
+  --method-primary-hover: #d8232a;
+  --method-primary-dark: #b8171d;
+  --method-gradient: linear-gradient(135deg, #f37021 0%, #d8232a 100%);
+  --method-gradient-hover: linear-gradient(135deg, #e65c0c 0%, #b8171d 100%);
+  --method-glow: rgba(216, 35, 42, 0.32);
+  --method-glow-strong: rgba(216, 35, 42, 0.45);
+  --method-bg-light: #fff7ed;
+  --method-border-light: #fed7aa;
+  --method-border-focus: rgba(243, 112, 33, 0.22);
+  --method-text-accent: #c2410c;
+  --method-hover-border: #fb923c;
+  --method-hover-bg: #fffbf5;
+}
+
+.payment-section[data-payment-theme="rocket"] {
+  --method-primary: #8c1590;
+  --method-primary-hover: #720f76;
+  --method-primary-dark: #5a095d;
+  --method-gradient: linear-gradient(135deg, #8c1590 0%, #68106b 100%);
+  --method-gradient-hover: linear-gradient(135deg, #78117c 0%, #540c57 100%);
+  --method-glow: rgba(140, 21, 144, 0.32);
+  --method-glow-strong: rgba(140, 21, 144, 0.45);
+  --method-bg-light: #fdf4fd;
+  --method-border-light: #f3cbf5;
+  --method-border-focus: rgba(140, 21, 144, 0.22);
+  --method-text-accent: #720f76;
+  --method-hover-border: #d46be0;
+  --method-hover-bg: #fdf7fe;
+}
+
 .payment-hero {
   padding-block: clamp(24px, 3.2vw, 36px);
   background: 
@@ -4062,6 +4114,303 @@ p {
   background: var(--bg-subtle);
 }
 
+/* 1. Introductory State Card */
+.payment-intro-card {
+  max-width: 680px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(28px, 4.2vw, 44px) clamp(20px, 3.8vw, 36px);
+  text-align: center;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.payment-intro-card.fade-out {
+  opacity: 0;
+  transform: translateY(-12px);
+}
+
+.intro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--ink-800);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.intro-badge-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+.payment-intro-title {
+  font-size: clamp(1.4rem, 2.8vw, 1.95rem);
+  font-weight: 800;
+  color: var(--ink-950);
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+
+.payment-intro-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 auto 24px;
+}
+
+.intro-summary-box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 28px;
+}
+
+.intro-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: center;
+}
+
+.intro-summary-item .summary-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.intro-summary-item .summary-val {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--ink-950);
+}
+
+.intro-action-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-proceed {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 13px 40px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+  transition: all var(--duration-fast) var(--ease);
+}
+
+.btn-proceed span {
+  color: #ffffff !important;
+}
+
+.btn-proceed .btn-icon {
+  width: 18px;
+  height: 18px;
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  transition: transform var(--duration-fast) var(--ease);
+}
+
+.btn-proceed:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45) !important;
+  transform: translateY(-2px);
+}
+
+.btn-proceed:hover span {
+  color: #ffffff !important;
+}
+
+.btn-proceed:hover .btn-icon {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  transform: translateX(4px);
+}
+
+.btn-proceed:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
+}
+
+/* 2. Reveal Animation */
+@keyframes paymentRevealSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.payment-reveal-wrapper.payment-revealed {
+  animation: paymentRevealSlideDown 0.48s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3. Platform Selector Toggle Bar */
+.payment-method-selector-card {
+  max-width: 1180px;
+  margin: 0 auto 24px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 18px 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.method-selector-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.method-selector-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink-950);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.method-selector-label svg {
+  color: var(--method-primary);
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.method-selector-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.method-toggle-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.method-toggle-btn {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+}
+
+.method-toggle-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.method-toggle-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: #ffffff;
+  border: 2px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  transition: all var(--duration-fast) var(--ease);
+}
+
+.method-toggle-btn:hover .method-toggle-content {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.method-toggle-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.method-toggle-logo {
+  height: 28px;
+  width: auto;
+  max-width: 115px;
+  object-fit: contain;
+  display: block;
+}
+
+.method-toggle-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--ink-950);
+}
+
+.method-toggle-indicator {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--duration-fast) var(--ease);
+}
+
+.method-toggle-indicator::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--method-primary);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: all var(--duration-fast) var(--ease);
+}
+
+.method-toggle-btn.is-active .method-toggle-content {
+  border-color: var(--method-primary);
+  background: var(--method-bg-light);
+  box-shadow: 0 0 0 2px var(--method-border-focus);
+}
+
+.method-toggle-btn.is-active .method-toggle-indicator {
+  border-color: var(--method-primary);
+}
+
+.method-toggle-btn.is-active .method-toggle-indicator::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 4. Side-by-Side Main Grid */
 .payment-container {
   max-width: 1180px;
   margin: 0 auto;
@@ -4105,12 +4454,14 @@ p {
   margin-bottom: 16px;
 }
 
+.provider-brand-wrap,
 .bkash-brand-wrap {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+.provider-header-logo,
 .bkash-header-logo {
   height: 34px;
   width: auto;
@@ -4119,37 +4470,41 @@ p {
   display: block;
 }
 
+.payment-sub-tag,
 .bkash-sub-tag {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #c40f5f;
-  background: #fdf2f8;
-  border: 1px solid #fbcfe8;
+  color: var(--method-text-accent);
+  background: var(--method-bg-light);
+  border: 1px solid var(--method-border-light);
   padding: 2px 8px;
   border-radius: var(--radius-pill);
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  transition: all var(--duration-fast) var(--ease);
 }
 
 .payment-method-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #fdf2f8;
-  color: #e2136e;
-  border: 1px solid #fbcfe8;
+  background: var(--method-bg-light);
+  color: var(--method-primary);
+  border: 1px solid var(--method-border-light);
   padding: 5px 12px;
   border-radius: var(--radius-pill);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.02em;
+  transition: all var(--duration-fast) var(--ease);
 }
 
 .payment-method-badge .dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #e2136e;
+  background: var(--method-primary);
+  transition: background var(--duration-fast) var(--ease);
 }
 
 .payment-info-grid {
@@ -4225,9 +4580,9 @@ p {
 }
 
 .btn-copy:hover {
-  background: var(--bg-subtle);
-  border-color: var(--brand);
-  color: var(--brand);
+  background: var(--method-bg-light);
+  border-color: var(--method-primary);
+  color: var(--method-primary);
 }
 
 .btn-copy.copied {
@@ -4261,8 +4616,9 @@ p {
 }
 
 .payment-instructions-box h3 svg {
-  color: var(--brand);
+  color: var(--method-primary);
   flex-shrink: 0;
+  transition: color var(--duration-fast) var(--ease);
 }
 
 .payment-steps-list {
@@ -4320,7 +4676,7 @@ p {
   font-weight: 600;
 }
 
-/* Radio Button Cards for Fee Type */
+/* 5. Radio Button Cards for Fee Type (Perfect Equal Heights Fix) */
 .fee-type-section {
   display: flex;
   flex-direction: column;
@@ -4332,11 +4688,14 @@ p {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  align-items: stretch;
 }
 
 .fee-radio-card {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   cursor: pointer;
   user-select: none;
 }
@@ -4351,29 +4710,36 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
+  padding: 12px 14px;
   background: #ffffff;
   border: 1.5px solid var(--border-strong);
   border-radius: var(--radius-sm);
   transition: all var(--duration-fast) var(--ease);
   gap: 8px;
+  height: 100%;
+  min-height: 52px;
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1;
 }
 
 .fee-radio-card:hover .fee-radio-content {
-  border-color: #f472b6;
-  background: #fff7fa;
+  border-color: var(--method-hover-border);
+  background: var(--method-hover-bg);
 }
 
 .fee-radio-card input[type="radio"]:checked + .fee-radio-content {
-  border-color: #e2136e;
-  background: #fdf2f8;
-  box-shadow: 0 0 0 2px rgba(226, 19, 110, 0.15);
+  border-color: var(--method-primary);
+  background: var(--method-bg-light);
+  box-shadow: 0 0 0 2px var(--method-border-focus);
 }
 
 .fee-radio-info {
   display: flex;
   align-items: center;
   gap: 9px;
+  flex: 1;
+  min-width: 0;
 }
 
 .fee-radio-dot {
@@ -4389,7 +4755,7 @@ p {
 }
 
 .fee-radio-card input[type="radio"]:checked + .fee-radio-content .fee-radio-dot {
-  border-color: #e2136e;
+  border-color: var(--method-primary);
 }
 
 .fee-radio-dot::after {
@@ -4397,7 +4763,7 @@ p {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #e2136e;
+  background: var(--method-primary);
   opacity: 0;
   transform: scale(0.5);
   transition: all var(--duration-fast) var(--ease);
@@ -4413,26 +4779,30 @@ p {
   font-weight: 700;
   color: var(--ink-950);
   line-height: 1.25;
+  white-space: nowrap;
 }
 
 .fee-badge {
   font-size: 0.74rem;
   font-weight: 700;
-  color: #c40f5f;
+  color: var(--method-text-accent);
   background: #ffffff;
-  border: 1px solid #fbcfe8;
+  border: 1px solid var(--method-border-light);
   padding: 2px 8px;
   border-radius: var(--radius-pill);
   white-space: nowrap;
+  flex-shrink: 0;
+  transition: all var(--duration-fast) var(--ease);
 }
 
-/* Button Confirm Payment - bKash pink */
-.btn-bkash {
-  background: #e2136e;
-  background: linear-gradient(135deg, #e2136e 0%, #c40f5f 100%);
+/* 6. Dynamic Submit Button */
+.btn-bkash,
+.btn-payment-submit {
+  background: var(--method-primary);
+  background: var(--method-gradient);
   color: #ffffff !important;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 16px rgba(226, 19, 110, 0.32);
+  box-shadow: 0 4px 16px var(--method-glow);
   width: 100%;
   min-height: 46px;
   padding: 12px 24px;
@@ -4447,18 +4817,21 @@ p {
   transition: all var(--duration-fast) var(--ease);
 }
 
-.btn-bkash:hover {
-  background: linear-gradient(135deg, #c40f5f 0%, #a80b51 100%);
-  box-shadow: 0 8px 24px rgba(226, 19, 110, 0.45);
+.btn-bkash:hover,
+.btn-payment-submit:hover {
+  background: var(--method-gradient-hover);
+  box-shadow: 0 8px 24px var(--method-glow-strong);
   transform: translateY(-2px);
   color: #ffffff !important;
 }
 
-.btn-bkash:active {
+.btn-bkash:active,
+.btn-payment-submit:active {
   transform: translateY(0);
 }
 
-.btn-bkash:disabled {
+.btn-bkash:disabled,
+.btn-payment-submit:disabled {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
@@ -4580,12 +4953,26 @@ p {
   }
 }
 
+@media (max-width: 840px) {
+  .method-toggle-group {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
 @media (max-width: 580px) {
   .payment-info-grid {
     grid-template-columns: 1fr;
   }
   .fee-options-grid {
     grid-template-columns: 1fr;
+  }
+  .intro-summary-box {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .fee-title {
+    white-space: normal;
   }
   .payment-card-header {
     flex-direction: column;
