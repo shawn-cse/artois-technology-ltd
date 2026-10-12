@@ -35,8 +35,6 @@
     <lastmod>2026-10-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-<<<<<<< HEAD
-=======
   </url>
   <url>
     <loc>https://www.artoistechnologyltd.com/carrier/</loc>
@@ -80,5 +78,16 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
->>>>>>> addin-website-edits
+  <url>
+    <loc>https://www.artoistechnologyltd.com/verify/mahmudul-vfy-6m2p9w4t-74n1k8rc-5v0j3q7h-e9s2b6ld/</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.artoistechnologyltd.com/verify/rohan-vfy-9r2m5k8w-41m6p3sc-7v0j4q2h-a8n5e9sl/</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

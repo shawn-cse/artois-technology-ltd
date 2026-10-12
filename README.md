@@ -37,6 +37,14 @@ https://www.artoistechnologyltd.com/verify/shakib-vfy-8k2n9m4r-52t6w1qb-7p0v3x8e
 
 https://www.artoistechnologyltd.com/verify/arafat-vfy-3b7k9w2t-61m5p8rc-4v0j2q9h-d8n3e7sl/
 
+### Md Mahmudul Hasan
+
+https://www.artoistechnologyltd.com/verify/mahmudul-vfy-6m2p9w4t-74n1k8rc-5v0j3q7h-e9s2b6ld/
+
+### Rohan Ahmed
+
+https://www.artoistechnologyltd.com/verify/rohan-vfy-9r2m5k8w-41m6p3sc-7v0j4q2h-a8n5e9sl/
+
 > These verification pages are unlisted and excluded from normal website navigation and search indexing. Anyone who has the complete URL or QR code can still access them.
 
 ## Technology
@@ -80,7 +88,11 @@ https://www.artoistechnologyltd.com/verify/arafat-vfy-3b7k9w2t-61m5p8rc-4v0j2q9h
 │   │   └── index.html
 │   ├── shakib-vfy-8k2n9m4r-52t6w1qb-7p0v3x8e-j4h8s2ld/
 │   │   └── index.html
-│   └── arafat-vfy-3b7k9w2t-61m5p8rc-4v0j2q9h-d8n3e7sl/
+│   ├── arafat-vfy-3b7k9w2t-61m5p8rc-4v0j2q9h-d8n3e7sl/
+│   │   └── index.html
+│   ├── mahmudul-vfy-6m2p9w4t-74n1k8rc-5v0j3q7h-e9s2b6ld/
+│   │   └── index.html
+│   └── rohan-vfy-9r2m5k8w-41m6p3sc-7v0j4q2h-a8n5e9sl/
 │       └── index.html
 └── assets/
     ├── css/
