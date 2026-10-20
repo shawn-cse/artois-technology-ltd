@@ -21,6 +21,8 @@
 
   <!-- Primary Stylesheet -->
   <link rel="stylesheet" href="/assets/css/main.css"/>
+  <!-- Page Specific Stylesheet -->
+  <link rel="stylesheet" href="payment.css"/>
 
   <!-- Open Graph Meta Tags -->
   <meta property="og:type" content="website"/>
@@ -364,8 +366,8 @@
                 We could not submit your payment details. Please check your information and try again.
               </div>
 
-              <!-- Public Formspree Form Action -->
-              <form id="payment-form" action="https://formspree.io/f/mjygyezd" method="POST" novalidate>
+              <!-- Public Formspree Form Action (xwlvjada & mjygyezd) -->
+              <form id="payment-form" action="https://formspree.io/f/xwlvjada" data-secondary-action="https://formspree.io/f/mjygyezd" method="POST" novalidate>
                 <div class="form-grid-2">
 
                   <!-- Fee Type Radio Selector (Onboarding Fee vs Midterm Fee) -->
@@ -611,5 +613,7 @@
 
   <!-- Interactive Scripts -->
   <script defer src="/assets/js/main.js"></script>
+  <!-- Page Specific Script -->
+  <script defer src="payment.js"></script>
 </body>
 </html>

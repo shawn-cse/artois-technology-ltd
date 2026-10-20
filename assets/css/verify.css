@@ -290,6 +290,12 @@ body::before {
   color: var(--success) !important;
 }
 
+.status-pill.declined,
+.status-pill.not-joined,
+.status-pill.inactive {
+  color: #dc2626 !important;
+}
+
 .status-dot {
   width: 7px;
   height: 7px;
@@ -305,6 +311,12 @@ body::before {
 
 .status-pill.completed .status-dot {
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.status-pill.declined .status-dot,
+.status-pill.not-joined .status-dot,
+.status-pill.inactive .status-dot {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
 }
 
 /* Verified Authenticated Bottom Badge */
@@ -328,6 +340,16 @@ body::before {
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.02em;
+}
+
+.verified-badge.verified-declined {
+  border-color: rgba(220, 38, 38, 0.28);
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.08);
+}
+
+.verified-badge.verified-declined svg {
+  color: #dc2626;
 }
 
 .verified-badge svg {

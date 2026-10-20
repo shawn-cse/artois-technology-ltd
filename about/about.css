@@ -1,0 +1,70 @@
+/**
+ * Artois Technology Limited — About Page Stylesheet
+ * Dedicated stylesheet for /about/
+ */
+
+/* About Page Custom Layouts & Enhancements */
+.about-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .about-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+.culture-card {
+  padding: 32px 28px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  transition: transform var(--duration-norm) var(--ease), border-color var(--duration-fast);
+}
+
+.culture-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.culture-card .card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+}
+
+.governance-list {
+  display: grid;
+  gap: 18px;
+}
+
+.gov-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.gov-item svg {
+  color: var(--brand);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.gov-item strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--ink-900);
+  margin-bottom: 3px;
+}
+
+.gov-item span {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}

@@ -1,0 +1,89 @@
+/**
+ * Artois Technology Limited — Process Stylesheet
+ * Dedicated stylesheet for /process/
+ */
+
+/* Engineering Lifecycle Timeline Cards */
+.lifecycle-card {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: clamp(20px, 3.5vw, 36px);
+  padding: clamp(26px, 3.5vw, 38px);
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--duration-norm) var(--ease), border-color var(--duration-fast);
+  margin-bottom: 24px;
+}
+
+.lifecycle-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--brand-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.lifecycle-num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  color: var(--brand);
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.lifecycle-content h3 {
+  font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+  margin-bottom: 12px;
+  color: var(--ink-900);
+}
+
+.lifecycle-content p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.lifecycle-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 768px) {
+  .lifecycle-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .lifecycle-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.lifecycle-meta-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+
+.lifecycle-meta-box small {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brand);
+  margin-bottom: 4px;
+}
+
+.lifecycle-meta-box strong {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--ink-800);
+  line-height: 1.45;
+}
