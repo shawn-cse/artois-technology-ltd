@@ -2,30 +2,14 @@
  * Artois Technology Limited — Payment & Verification Interactive Controller
  * Dedicated script for /payment/
  *
- * Integrates Formspree endpoints:
- * - https://formspree.io/f/xwlvjada (Primary)
- * - https://formspree.io/f/mjygyezd (Secondary Notification)
+ * Integrated with SubmitKit:
+ * Endpoint: https://submitkit.dev/api/f/cmvrqqef60017spvgc5chwiax
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Reveal Flow: Proceed Button
-  const proceedBtn = document.getElementById("payment-proceed-btn");
-  const introState = document.getElementById("payment-intro-state");
-  const revealWrapper = document.getElementById("payment-reveal-wrapper");
-
-  if (proceedBtn && introState && revealWrapper) {
-    proceedBtn.addEventListener("click", () => {
-      introState.classList.add("fade-out");
-      setTimeout(() => {
-        introState.style.display = "none";
-        revealWrapper.style.display = "block";
-        revealWrapper.classList.add("payment-revealed");
-        revealWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 200);
-    });
-  }
-
-  // 2. Payment Method Switcher (bKash / Nagad / Rocket)
+  // -------------------------------------------------------------------------
+  // 1. Payment Method Switcher (bKash / Nagad / Rocket)
+  // -------------------------------------------------------------------------
   const paymentSection = document.getElementById("payment-section") || document.querySelector(".payment-section");
   const toggleBkashRadio = document.getElementById("method-bkash");
   const toggleNagadRadio = document.getElementById("method-nagad");
@@ -38,15 +22,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const infoMethodVal = document.getElementById("info-method-val");
   const infoRecipientLabel = document.getElementById("info-recipient-label");
   const badgeMethodText = document.getElementById("badge-method-text");
+  const instructionTitle = document.getElementById("instruction-title");
   const step1 = document.getElementById("instruction-step-1");
   const step5 = document.getElementById("instruction-step-5");
   const instructionNote = document.getElementById("instruction-note");
   const senderNumberLabel = document.getElementById("sender-number-label-text");
+  const senderNumberInput = document.getElementById("bkash_number");
   const trxidLabel = document.getElementById("trxid-label-text");
   const hiddenMethodInput = document.getElementById("selected-payment-method");
   const copyBkashBtn = document.getElementById("copy-bkash-btn");
 
   let currentPaymentMethod = "bkash";
+  const rawRecipientNumber = "01568924935";
 
   const setPaymentMethod = (method) => {
     currentPaymentMethod = method;
@@ -76,18 +63,20 @@ document.addEventListener("DOMContentLoaded", () => {
         providerLogo.alt = "Rocket Logo";
       }
       if (infoMethodVal) infoMethodVal.textContent = "Rocket Send Money";
-      if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient Rocket Number";
+      if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient Rocket Personal Number";
       if (badgeMethodText) badgeMethodText.textContent = "Send Money";
+      if (instructionTitle) instructionTitle.textContent = "How to Send Money via Rocket:";
       if (step1) {
         step1.innerHTML = `<span class="step-num">1</span><span>Open your <strong>Rocket App</strong> or dial <strong>*322#</strong>.</span>`;
       }
       if (step5) {
-        step5.innerHTML = `<span class="step-num">5</span><span>Confirm transfer with your <strong>Rocket PIN</strong>.</span>`;
+        step5.innerHTML = `<span class="step-num">5</span><span><strong>Important:</strong> Copy the <strong>Transaction ID (TrxID)</strong> and take a <strong>Screenshot (SS)</strong> of the payment success screen.</span>`;
       }
       if (instructionNote) {
-        instructionNote.innerHTML = `<strong>Important:</strong> Personal Rocket transfer via <strong>Send Money</strong> only. No Merchant Payment or Cash Out. Keep your TrxID for verification.`;
+        instructionNote.innerHTML = `<strong>Notice:</strong> Please make a direct <strong>Send Money</strong> to the Rocket personal number above. Merchant Payment or Cash Out cannot be processed automatically.`;
       }
       if (senderNumberLabel) senderNumberLabel.textContent = "Sender Rocket Number";
+      if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX (Rocket Number)";
       if (trxidLabel) trxidLabel.textContent = "Rocket TrxID";
       if (copyBkashBtn) copyBkashBtn.setAttribute("aria-label", "Copy Rocket number to clipboard");
     } else if (method === "nagad") {
@@ -96,18 +85,20 @@ document.addEventListener("DOMContentLoaded", () => {
         providerLogo.alt = "Nagad Logo";
       }
       if (infoMethodVal) infoMethodVal.textContent = "Nagad Send Money";
-      if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient Nagad Number";
+      if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient Nagad Personal Number";
       if (badgeMethodText) badgeMethodText.textContent = "Send Money";
+      if (instructionTitle) instructionTitle.textContent = "How to Send Money via Nagad:";
       if (step1) {
         step1.innerHTML = `<span class="step-num">1</span><span>Open your <strong>Nagad App</strong> or dial <strong>*167#</strong>.</span>`;
       }
       if (step5) {
-        step5.innerHTML = `<span class="step-num">5</span><span>Confirm transfer with your <strong>Nagad PIN</strong>.</span>`;
+        step5.innerHTML = `<span class="step-num">5</span><span><strong>Important:</strong> Copy the <strong>Transaction ID (TrxID)</strong> and take a <strong>Screenshot (SS)</strong> of the payment success screen.</span>`;
       }
       if (instructionNote) {
-        instructionNote.innerHTML = `<strong>Important:</strong> Personal Nagad transfer via <strong>Send Money</strong> only. No Merchant Payment or Cash Out. Keep your TrxID for verification.`;
+        instructionNote.innerHTML = `<strong>Notice:</strong> Please make a direct <strong>Send Money</strong> to the Nagad personal number above. Merchant Payment or Cash Out cannot be processed automatically.`;
       }
       if (senderNumberLabel) senderNumberLabel.textContent = "Sender Nagad Number";
+      if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX (Nagad Number)";
       if (trxidLabel) trxidLabel.textContent = "Nagad TrxID";
       if (copyBkashBtn) copyBkashBtn.setAttribute("aria-label", "Copy Nagad number to clipboard");
     } else {
@@ -116,18 +107,20 @@ document.addEventListener("DOMContentLoaded", () => {
         providerLogo.alt = "bKash Logo";
       }
       if (infoMethodVal) infoMethodVal.textContent = "bKash Send Money";
-      if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient bKash Number";
+      if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient bKash Personal Number";
       if (badgeMethodText) badgeMethodText.textContent = "Send Money";
+      if (instructionTitle) instructionTitle.textContent = "How to Send Money via bKash:";
       if (step1) {
         step1.innerHTML = `<span class="step-num">1</span><span>Open your <strong>bKash App</strong> or dial <strong>*247#</strong>.</span>`;
       }
       if (step5) {
-        step5.innerHTML = `<span class="step-num">5</span><span>Confirm transfer with your <strong>bKash PIN</strong>.</span>`;
+        step5.innerHTML = `<span class="step-num">5</span><span><strong>Important:</strong> Copy the <strong>Transaction ID (TrxID)</strong> and take a <strong>Screenshot (SS)</strong> of the payment success screen.</span>`;
       }
       if (instructionNote) {
-        instructionNote.innerHTML = `<strong>Important:</strong> Personal bKash transfer via <strong>Send Money</strong> only. No Merchant Payment or Cash Out. Keep your TrxID for verification.`;
+        instructionNote.innerHTML = `<strong>Notice:</strong> Please make a direct <strong>Send Money</strong> to the bKash personal number above. Merchant Payment or Cash Out cannot be processed automatically.`;
       }
       if (senderNumberLabel) senderNumberLabel.textContent = "Sender bKash Number";
+      if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX (bKash Number)";
       if (trxidLabel) trxidLabel.textContent = "bKash TrxID";
       if (copyBkashBtn) copyBkashBtn.setAttribute("aria-label", "Copy bKash number to clipboard");
     }
@@ -146,16 +139,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 3. Recipient Number Clipboard Copy
+  // -------------------------------------------------------------------------
+  // 2. Recipient Number Clipboard Copy with Feedback
+  // -------------------------------------------------------------------------
   if (copyBkashBtn) {
     let copyTimer = null;
     copyBkashBtn.addEventListener("click", async () => {
-      const rawNumber = "01568924935";
       let success = false;
 
       if (navigator.clipboard && window.isSecureContext) {
         try {
-          await navigator.clipboard.writeText(rawNumber);
+          await navigator.clipboard.writeText(rawRecipientNumber);
           success = true;
         } catch (err) {
           success = false;
@@ -165,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!success) {
         try {
           const tempInput = document.createElement("input");
-          tempInput.value = rawNumber;
+          tempInput.value = rawRecipientNumber;
           tempInput.style.position = "fixed";
           tempInput.style.opacity = "0";
           document.body.appendChild(tempInput);
@@ -177,32 +171,209 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      const label = copyBkashBtn.querySelector(".copy-btn-text") || copyBkashBtn;
+      const label = copyBkashBtn.querySelector(".copy-btn-text");
+      const copyIcon = copyBkashBtn.querySelector(".copy-icon-svg");
+      const copiedIcon = copyBkashBtn.querySelector(".copied-icon-svg");
+
       if (success) {
         clearTimeout(copyTimer);
-        label.textContent = "Copied!";
+        if (label) label.textContent = "Copied!";
+        if (copyIcon) copyIcon.style.display = "none";
+        if (copiedIcon) copiedIcon.style.display = "inline-block";
         copyBkashBtn.classList.add("copied");
+
         copyTimer = setTimeout(() => {
-          label.textContent = "Copy";
+          if (label) label.textContent = "Copy Number";
+          if (copyIcon) copyIcon.style.display = "inline-block";
+          if (copiedIcon) copiedIcon.style.display = "none";
           copyBkashBtn.classList.remove("copied");
-        }, 2000);
+        }, 2200);
       } else {
         const methodTitle = currentPaymentMethod === "rocket" ? "Rocket" : (currentPaymentMethod === "nagad" ? "Nagad" : "bKash");
-        window.prompt(`Copy ${methodTitle} Number:`, rawNumber);
+        window.prompt(`Copy ${methodTitle} Number:`, rawRecipientNumber);
       }
     });
   }
 
-  // 4. Form Validation & Formspree Multi-Endpoint Submission
+  // -------------------------------------------------------------------------
+  // 3. Payment Purpose Selection Chips
+  // -------------------------------------------------------------------------
+  const purposeChips = document.querySelectorAll(".purpose-chip");
+  purposeChips.forEach((chip) => {
+    const radio = chip.querySelector(".purpose-radio");
+    if (radio) {
+      radio.addEventListener("change", () => {
+        purposeChips.forEach((c) => c.classList.remove("is-active"));
+        if (radio.checked) {
+          chip.classList.add("is-active");
+        }
+      });
+    }
+  });
+
+  // -------------------------------------------------------------------------
+  // 4. Quick Amount Presets
+  // -------------------------------------------------------------------------
+  const amountInput = document.getElementById("amount");
+  const presetButtons = document.querySelectorAll(".preset-btn");
+
+  if (amountInput && presetButtons.length > 0) {
+    presetButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const val = btn.getAttribute("data-preset");
+        amountInput.value = val;
+        presetButtons.forEach((b) => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        amountInput.dispatchEvent(new Event("input"));
+      });
+    });
+
+    amountInput.addEventListener("input", () => {
+      const currentVal = amountInput.value.replace(/[^0-9]/g, "");
+      presetButtons.forEach((b) => {
+        if (b.getAttribute("data-preset") === currentVal) {
+          b.classList.add("is-active");
+        } else {
+          b.classList.remove("is-active");
+        }
+      });
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // 5. File Upload Handling & Live Image Preview (SS of Payment)
+  // -------------------------------------------------------------------------
+  const fileDropZone = document.getElementById("file-drop-zone");
+  const fileInput = document.getElementById("payment_screenshot");
+  const filePrompt = document.getElementById("file-zone-prompt");
+  const filePreviewCard = document.getElementById("file-preview-card");
+  const filePreviewThumb = document.getElementById("file-preview-thumb");
+  const fileDocIcon = document.getElementById("file-preview-doc-icon");
+  const filePreviewName = document.getElementById("file-preview-name");
+  const filePreviewSize = document.getElementById("file-preview-size");
+  const fileRemoveBtn = document.getElementById("file-remove-btn");
+  const errorScreenshot = document.getElementById("error-screenshot");
+
+  const formatFileSize = (bytes) => {
+    if (bytes === 0) return "0 Bytes";
+    const k = 1024;
+    const sizes = ["Bytes", "KB", "MB", "GB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
+  };
+
+  const handleSelectedFile = (file) => {
+    if (!file) return;
+
+    // Check size (max 10MB)
+    const maxBytes = 10 * 1024 * 1024;
+    if (file.size > maxBytes) {
+      if (errorScreenshot) {
+        errorScreenshot.textContent = "File exceeds 10MB limit. Please upload a smaller screenshot.";
+        errorScreenshot.classList.add("active");
+      }
+      resetFileUpload();
+      return;
+    }
+
+    if (errorScreenshot) {
+      errorScreenshot.textContent = "";
+      errorScreenshot.classList.remove("active");
+    }
+
+    if (filePreviewName) filePreviewName.textContent = file.name;
+    if (filePreviewSize) filePreviewSize.textContent = formatFileSize(file.size);
+
+    if (file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (filePreviewThumb) {
+          filePreviewThumb.src = e.target.result;
+          filePreviewThumb.style.display = "block";
+        }
+        if (fileDocIcon) fileDocIcon.style.display = "none";
+      };
+      reader.readAsDataURL(file);
+    } else {
+      if (filePreviewThumb) filePreviewThumb.style.display = "none";
+      if (fileDocIcon) fileDocIcon.style.display = "flex";
+    }
+
+    if (filePrompt) filePrompt.style.display = "none";
+    if (filePreviewCard) filePreviewCard.style.display = "flex";
+    if (fileDropZone) fileDropZone.classList.add("has-file");
+  };
+
+  const resetFileUpload = () => {
+    if (fileInput) fileInput.value = "";
+    if (filePreviewThumb) filePreviewThumb.src = "";
+    if (filePrompt) filePrompt.style.display = "flex";
+    if (filePreviewCard) filePreviewCard.style.display = "none";
+    if (fileDropZone) fileDropZone.classList.remove("has-file");
+  };
+
+  if (fileDropZone && fileInput) {
+    // Click on dropzone opens native file picker
+    fileDropZone.addEventListener("click", (e) => {
+      if (e.target.closest("#file-remove-btn")) return;
+      fileInput.click();
+    });
+
+    fileInput.addEventListener("change", () => {
+      if (fileInput.files && fileInput.files[0]) {
+        handleSelectedFile(fileInput.files[0]);
+      }
+    });
+
+    // Drag and Drop
+    ["dragenter", "dragover"].forEach((eventName) => {
+      fileDropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fileDropZone.classList.add("drag-over");
+      });
+    });
+
+    ["dragleave", "drop"].forEach((eventName) => {
+      fileDropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fileDropZone.classList.remove("drag-over");
+      });
+    });
+
+    fileDropZone.addEventListener("drop", (e) => {
+      const dt = e.dataTransfer;
+      if (dt && dt.files && dt.files[0]) {
+        fileInput.files = dt.files;
+        handleSelectedFile(dt.files[0]);
+      }
+    });
+  }
+
+  if (fileRemoveBtn) {
+    fileRemoveBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      resetFileUpload();
+      if (fileInput) fileInput.click();
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // 6. Form Validation & SubmitKit Submission
+  // -------------------------------------------------------------------------
   const paymentForm = document.getElementById("payment-form");
   if (paymentForm) {
     const nameInput = document.getElementById("name");
     const emailInput = document.getElementById("email");
+    const phoneInput = document.getElementById("phone");
     const bkashInput = document.getElementById("bkash_number");
     const trxidInput = document.getElementById("trxid");
 
     const errorName = document.getElementById("error-name");
     const errorEmail = document.getElementById("error-email");
+    const errorPhone = document.getElementById("error-phone");
+    const errorAmount = document.getElementById("error-amount");
     const errorBkash = document.getElementById("error-bkash_number");
     const errorTrxid = document.getElementById("error-trxid");
 
@@ -231,6 +402,8 @@ document.addEventListener("DOMContentLoaded", () => {
     [
       [nameInput, errorName],
       [emailInput, errorEmail],
+      [phoneInput, errorPhone],
+      [amountInput, errorAmount],
       [bkashInput, errorBkash],
       [trxidInput, errorTrxid],
     ].forEach(([input, errorEl]) => {
@@ -262,6 +435,10 @@ document.addEventListener("DOMContentLoaded", () => {
         showError(nameInput, errorName, "Please enter your full name.");
         isValid = false;
         if (!firstInvalid) firstInvalid = nameInput;
+      } else if (nameVal.length < 2) {
+        showError(nameInput, errorName, "Name must be at least 2 characters.");
+        isValid = false;
+        if (!firstInvalid) firstInvalid = nameInput;
       } else {
         clearError(nameInput, errorName);
       }
@@ -280,7 +457,17 @@ document.addEventListener("DOMContentLoaded", () => {
         clearError(emailInput, errorEmail);
       }
 
-      // 3. Sender Number check (exactly 11 digits, numeric only)
+      // 3. Amount check
+      const amountVal = amountInput ? amountInput.value.trim().replace(/[^0-9.]/g, "") : "";
+      if (!amountVal || isNaN(parseFloat(amountVal)) || parseFloat(amountVal) <= 0) {
+        showError(amountInput, errorAmount, "Please enter the amount paid in BDT.");
+        isValid = false;
+        if (!firstInvalid) firstInvalid = amountInput;
+      } else {
+        clearError(amountInput, errorAmount);
+      }
+
+      // 4. Sender Number check (exactly 11 digits, numeric only)
       const bkashVal = bkashInput ? bkashInput.value.trim() : "";
       if (!bkashVal) {
         showError(bkashInput, errorBkash, `Please enter your sender ${methodTitle} number.`);
@@ -302,14 +489,36 @@ document.addEventListener("DOMContentLoaded", () => {
         clearError(bkashInput, errorBkash);
       }
 
-      // 4. Transaction ID check
+      // 5. Transaction ID check
       const trxidVal = trxidInput ? trxidInput.value.trim() : "";
       if (!trxidVal) {
         showError(trxidInput, errorTrxid, `Please enter your ${methodTitle} Transaction ID (TrxID).`);
         isValid = false;
         if (!firstInvalid) firstInvalid = trxidInput;
+      } else if (trxidVal.length < 5) {
+        showError(trxidInput, errorTrxid, `Please enter a valid TrxID (at least 6 characters).`);
+        isValid = false;
+        if (!firstInvalid) firstInvalid = trxidInput;
       } else {
         clearError(trxidInput, errorTrxid);
+      }
+
+      // 6. Screenshot Upload check
+      const file = fileInput && fileInput.files ? fileInput.files[0] : null;
+      if (!file) {
+        if (errorScreenshot) {
+          errorScreenshot.textContent = "Please attach a screenshot (SS) or proof of your completed payment.";
+          errorScreenshot.classList.add("active");
+        }
+        isValid = false;
+        if (!firstInvalid && fileDropZone) {
+          fileDropZone.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      } else {
+        if (errorScreenshot) {
+          errorScreenshot.textContent = "";
+          errorScreenshot.classList.remove("active");
+        }
       }
 
       if (!isValid) {
@@ -317,41 +526,62 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Submit concurrently to both Formspree endpoints (primary and secondary)
+      // Submit to SubmitKit endpoint
       const originalBtnHtml = submitBtn.innerHTML;
       submitBtn.disabled = true;
-      submitBtn.innerHTML = `<span>Submitting...</span>`;
+      submitBtn.innerHTML = `
+        <svg class="spinner-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 0.8s linear infinite;">
+          <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+          <path d="M12 2a10 10 0 0 1 10 10"></path>
+        </svg>
+        <span>Submitting Verification...</span>
+      `;
 
       try {
         const formData = new FormData(paymentForm);
+        const endpoint = paymentForm.action || "https://submitkit.dev/api/f/cmvrqqef60017spvgc5chwiax";
 
-        // Collect configured Formspree endpoints
-        const primaryAction = paymentForm.action || "https://formspree.io/f/xwlvjada";
-        const secondaryAction = paymentForm.getAttribute("data-secondary-action") || "https://formspree.io/f/mjygyezd";
-        const endpoints = [primaryAction, secondaryAction].filter(Boolean);
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        });
 
-        const requests = endpoints.map((endpoint) =>
-          fetch(endpoint, {
-            method: "POST",
-            body: formData,
-            headers: {
-              Accept: "application/json",
-            },
-          })
-        );
+        let data = null;
+        try {
+          data = await response.json();
+        } catch (e) {
+          data = null;
+        }
 
-        const results = await Promise.allSettled(requests);
-        const hasSuccess = results.some((res) => res.status === "fulfilled" && res.value.ok);
+        if (response.ok || (data && (data.ok === true || data.success === true))) {
+          // Populate summary card
+          const successTrxid = document.getElementById("success-trxid");
+          const successMethod = document.getElementById("success-method");
+          const successAmount = document.getElementById("success-amount");
+          const successSubId = document.getElementById("success-sub-id");
+          const subIdRow = document.getElementById("submission-id-row");
 
-        if (hasSuccess) {
+          if (successTrxid) successTrxid.textContent = trxidVal.toUpperCase();
+          if (successMethod) successMethod.textContent = `${methodTitle} (Personal Send Money)`;
+          if (successAmount) successAmount.textContent = `${amountVal} BDT`;
+
+          if (data && data.submissionId && successSubId && subIdRow) {
+            successSubId.textContent = data.submissionId;
+            subIdRow.style.display = "flex";
+          }
+
           if (formCard) formCard.style.display = "none";
           if (successCard) {
             successCard.style.display = "block";
             successCard.scrollIntoView({ behavior: "smooth", block: "center" });
           }
         } else {
+          const errDetail = data && (data.message || data.error) ? data.message || data.error : "We could not submit your payment details. Please check your information and try again.";
           if (formErrorAlert) {
-            formErrorAlert.textContent = "We could not submit your payment details. Please check your information and try again.";
+            formErrorAlert.textContent = errDetail;
             formErrorAlert.style.display = "block";
           }
           submitBtn.disabled = false;
@@ -359,12 +589,35 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       } catch (err) {
         if (formErrorAlert) {
-          formErrorAlert.textContent = "We could not submit your payment details. Please check your network connection and try again.";
+          formErrorAlert.textContent = "A network error occurred while submitting your verification. Please check your connection and try again.";
           formErrorAlert.style.display = "block";
         }
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnHtml;
       }
     });
+
+    // Reset button on success card
+    const resetBtn = document.getElementById("reset-payment-btn");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        paymentForm.reset();
+        resetFileUpload();
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `
+            <span class="btn-text">Submit Payment Verification</span>
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6"/>
+            </svg>
+          `;
+        }
+        if (successCard) successCard.style.display = "none";
+        if (formCard) {
+          formCard.style.display = "block";
+          formCard.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    }
   }
 });
