@@ -270,6 +270,18 @@ body::before {
   font-weight: 650;
 }
 
+.record-item strong a {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 650;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.record-item strong a:hover {
+  color: var(--brand-dark);
+  text-decoration: underline;
+}
+
 .record-item.full {
   grid-column: 1 / -1;
 }

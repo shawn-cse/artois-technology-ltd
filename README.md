@@ -14,6 +14,7 @@ A fully static, responsive, multi-page corporate website for **Artois Technology
 - Process: https://www.artoistechnologyltd.com/process/
 - FAQ: https://www.artoistechnologyltd.com/faq/
 - Careers: https://www.artoistechnologyltd.com/careers/
+- Employee Directory: https://www.artoistechnologyltd.com/emp/
 - Payment: https://www.artoistechnologyltd.com/payment/
 
 ## Technology

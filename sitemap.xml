@@ -43,6 +43,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.artoistechnologyltd.com/emp/</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://www.artoistechnologyltd.com/start-project/</loc>
     <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
@@ -61,19 +67,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.artoistechnologyltd.com/verify/kallol-vfy-5p9d2w8x-31m7k4rb-8t0s6q1h-v4j8e2ld/</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.artoistechnologyltd.com/verify/shakib-vfy-8k2n9m4r-52t6w1qb-7p0v3x8e-j4h8s2ld/</loc>
-    <lastmod>2026-10-06</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.artoistechnologyltd.com/verify/arafat-vfy-3b7k9w2t-61m5p8rc-4v0j2q9h-d8n3e7sl/</loc>
     <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -87,6 +81,12 @@
   <url>
     <loc>https://www.artoistechnologyltd.com/verify/rohan-vfy-9r2m5k8w-41m6p3sc-7v0j4q2h-a8n5e9sl/</loc>
     <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.artoistechnologyltd.com/verify/hamida-vfy-5h2k8m4r-71t6w3qb-9p0v2x8e-j5h9s3ld/</loc>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
