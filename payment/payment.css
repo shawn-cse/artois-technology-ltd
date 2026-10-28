@@ -950,58 +950,328 @@
   to { transform: rotate(360deg); }
 }
 
-/* Responsive Media Queries */
+/* Responsive Media Queries — Ultra-Compact & Polished for Mobile */
 @media (max-width: 900px) {
   .payment-container {
     grid-template-columns: 1fr;
-    max-width: 640px;
+    max-width: 600px;
   }
 }
 
 @media (max-width: 680px) {
+  .payment-hero {
+    padding-block: 14px 12px;
+  }
+  .payment-hero .breadcrumb {
+    margin-bottom: 4px;
+    font-size: 0.78rem;
+  }
+  .payment-hero .eyebrow {
+    font-size: 0.7rem;
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+  .payment-hero h1 {
+    font-size: 1.35rem;
+  }
+  .payment-section {
+    padding-block: 14px 24px;
+  }
+  .payment-method-selector-card {
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+  }
+  .method-selector-top {
+    margin-bottom: 8px;
+  }
+  .method-selector-label {
+    font-size: 0.76rem;
+  }
+  /* Keep methods side-by-side on mobile in a sleek 3-column control */
   .method-toggle-group {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .method-toggle-content {
+    padding: 8px 4px;
+    justify-content: center;
+    border-radius: 8px;
+  }
+  .method-toggle-indicator {
+    display: none;
+  }
+  .method-toggle-brand {
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+    text-align: center;
+  }
+  .method-toggle-logo {
+    height: 18px;
+    max-width: 68px;
+  }
+  .method-toggle-name {
+    font-size: 0.74rem;
+    font-weight: 700;
+  }
+
+  /* Compact Cards */
+  .payment-container {
+    gap: 12px;
+  }
+  .payment-card {
+    padding: 14px 12px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+  }
+  .payment-card-header {
+    margin-bottom: 12px;
+    padding-bottom: 8px;
     gap: 8px;
   }
+  .payment-card-header h2 {
+    font-size: 1.1rem;
+  }
+  .provider-header-logo {
+    height: 24px;
+    max-width: 100px;
+  }
+  .payment-sub-tag {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+  }
+  .payment-method-badge {
+    font-size: 0.72rem;
+    padding: 2px 8px;
+  }
+
+  /* Recipient Box Compact */
+  .payment-recipient-box {
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-width: 1.5px;
+  }
+  .recipient-box-header {
+    margin-bottom: 8px;
+  }
+  .recipient-label {
+    font-size: 0.72rem;
+  }
+  .recipient-tag {
+    font-size: 0.65rem;
+    padding: 1px 6px;
+  }
+  .payment-number-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .payment-number-display {
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+  }
+  .btn-copy {
+    min-height: 34px;
+    height: 34px;
+    padding: 5px 10px;
+    font-size: 0.76rem;
+    gap: 5px;
+    border-radius: 6px;
+    width: auto;
+  }
+  .btn-copy svg {
+    width: 14px;
+    height: 14px;
+  }
+  .simple-payment-note {
+    padding: 8px 10px;
+    font-size: 0.74rem;
+    gap: 6px;
+    line-height: 1.35;
+    border-radius: 6px;
+  }
+  .simple-payment-note svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Form Section Compact */
   .form-grid-2 {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
+  .form-group {
+    gap: 3px;
+  }
+  .form-label {
+    font-size: 0.78rem;
+    margin-bottom: 1px;
+  }
+  .notes-label {
+    font-size: 0.8rem;
+  }
+  .form-input {
+    height: 38px;
+    padding: 7px 11px;
+    font-size: 0.88rem;
+    border-radius: 6px;
+  }
+
+  /* Purpose Chips: Compact 2x2 grid */
   .purpose-chips-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
   }
-  .amount-row-container {
-    flex-direction: column;
-    align-items: stretch;
+  .purpose-chip-content {
+    padding: 6px 6px;
+    min-height: 36px;
+    border-radius: 6px;
   }
+  .purpose-text {
+    font-size: 0.72rem;
+    line-height: 1.25;
+  }
+
+  /* Amount & Presets */
   .amount-presets {
-    justify-content: space-between;
+    gap: 5px;
+    margin-top: 5px;
   }
   .preset-btn {
     flex: 1;
+    padding: 5px 6px;
+    font-size: 0.72rem;
     text-align: center;
+    border-radius: 5px;
   }
-}
 
-@media (max-width: 480px) {
-  .payment-card {
-    padding: 16px 14px;
+  /* File Drop Zone Compact */
+  .file-upload-zone {
+    padding: 10px 10px;
+    border-radius: 8px;
   }
-  .payment-recipient-box {
-    padding: 14px 14px;
+  .file-zone-prompt {
+    gap: 4px;
   }
-  .payment-number-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+  .file-zone-icon {
+    width: 32px;
+    height: 32px;
   }
-  .btn-copy {
-    width: 100%;
+  .file-zone-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+  .file-zone-copy {
+    font-size: 0.78rem;
+  }
+  .file-zone-hint {
+    font-size: 0.68rem;
+    margin-top: 1px;
+  }
+  .file-preview-card {
+    gap: 8px;
+  }
+  .file-preview-thumb-wrap {
+    width: 38px;
+    height: 38px;
+  }
+  .file-preview-name {
+    font-size: 0.78rem;
+  }
+  .file-preview-size {
+    font-size: 0.68rem;
+  }
+  .file-remove-btn {
+    padding: 4px 8px;
+    font-size: 0.72rem;
+  }
+
+  /* Notes */
+  .form-textarea {
+    min-height: 48px;
+    height: 48px;
+    padding: 7px 11px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+  }
+
+  /* Submit Button */
+  .btn-payment-submit {
+    min-height: 42px;
+    height: 42px;
+    padding: 10px 14px;
+    font-size: 0.92rem;
+    border-radius: 8px;
+  }
+  .btn-payment-submit .btn-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Success Card Compact */
+  .payment-success-card {
+    padding: 20px 12px;
+    border-radius: 12px;
+  }
+  .payment-success-card .success-icon-wrap {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 10px;
+  }
+  .payment-success-card .success-icon-wrap svg {
+    width: 26px;
+    height: 26px;
+  }
+  .payment-success-card h2 {
+    font-size: 1.18rem;
+    margin-bottom: 6px;
+  }
+  .payment-success-card p {
+    font-size: 0.85rem;
+    margin-bottom: 14px;
+  }
+  .success-summary-card {
+    padding: 10px 12px;
+    margin-bottom: 16px;
+    gap: 8px;
+    border-radius: 8px;
+  }
+  .summary-row {
+    font-size: 0.78rem;
+    padding-bottom: 6px;
   }
   .success-actions {
     flex-direction: column;
     width: 100%;
+    gap: 8px;
   }
   .success-actions .btn {
     width: 100%;
+    min-height: 40px;
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .payment-number-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+  .btn-copy {
+    width: 100%;
+    justify-content: center;
+  }
+  .method-toggle-logo {
+    max-width: 55px;
+    height: 16px;
+  }
+  .method-toggle-name {
+    font-size: 0.7rem;
   }
 }

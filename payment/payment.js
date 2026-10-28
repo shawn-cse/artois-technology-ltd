@@ -399,14 +399,10 @@ document.addEventListener("DOMContentLoaded", () => {
         clearError(amountInput, errorAmount);
       }
 
-      // 3. Sender Number check
+      // 3. Sender Number check (Optional, validate format only if provided)
       const senderVal = senderInput ? senderInput.value.trim() : "";
       const bdPhoneRegex = /^01[3-9]\d{8}$/;
-      if (!senderVal) {
-        showError(senderInput, errorSender, `Please enter your sender ${methodTitle} number.`);
-        isValid = false;
-        if (!firstInvalid) firstInvalid = senderInput;
-      } else if (!bdPhoneRegex.test(senderVal.replace(/[-\s]/g, ""))) {
+      if (senderVal && !bdPhoneRegex.test(senderVal.replace(/[-\s]/g, ""))) {
         showError(senderInput, errorSender, `Please enter a valid 11-digit ${methodTitle} number (e.g. 01XXXXXXXXX).`);
         isValid = false;
         if (!firstInvalid) firstInvalid = senderInput;
@@ -480,7 +476,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (successName) successName.textContent = nameVal;
           if (successMethod) successMethod.textContent = `${methodTitle} (Send Money)`;
           if (successAmount) successAmount.textContent = `${amountVal} TK`;
-          if (successSender) successSender.textContent = senderVal;
+          if (successSender) successSender.textContent = senderVal || "In Screenshot";
 
           if (formCard) formCard.style.display = "none";
           if (successCard) {
