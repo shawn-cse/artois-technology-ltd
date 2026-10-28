@@ -306,13 +306,6 @@ body::before {
 .status-pill.inactive {
   color: #dc2626 !important;
 }
-}
-
-.status-pill.declined .status-dot,
-.status-pill.not-joined .status-dot,
-.status-pill.inactive .status-dot {
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
-}
 
 /* Verified Authenticated Bottom Badge */
 .verify-action-area {
