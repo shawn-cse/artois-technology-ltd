@@ -268,10 +268,10 @@
               We could not submit your payment details. Please check the information and try again.
             </div>
 
-            <!-- SubmitKit Form Action -->
+            <!-- Forminit Form Action -->
             <form
               id="payment-form"
-              action="https://submitkit.dev/api/f/cmvrqqef60017spvgc5chwiax"
+              action="https://forminit.com/f/gmeqzhjt9jb"
               method="POST"
               enctype="multipart/form-data"
               novalidate
@@ -284,13 +284,26 @@
                     Payment Purpose <span class="required-star" aria-hidden="true">*</span>
                   </label>
                   <div class="purpose-chips-grid" role="radiogroup" aria-label="Payment Purpose">
-                    <label class="purpose-chip is-active" for="purpose_project">
+                    <label class="purpose-chip is-active" for="purpose_internship">
+                      <input
+                        type="radio"
+                        id="purpose_internship"
+                        name="fi-text-purpose"
+                        value="Training / Internship Program"
+                        checked
+                        class="purpose-radio"
+                      />
+                      <span class="purpose-chip-content">
+                        <span class="purpose-text">Training &bull; Internship Program</span>
+                      </span>
+                    </label>
+
+                    <label class="purpose-chip" for="purpose_project">
                       <input
                         type="radio"
                         id="purpose_project"
-                        name="payment_purpose"
+                        name="fi-text-purpose"
                         value="Client Project &amp; Milestone"
-                        checked
                         class="purpose-radio"
                       />
                       <span class="purpose-chip-content">
@@ -302,25 +315,12 @@
                       <input
                         type="radio"
                         id="purpose_services"
-                        name="payment_purpose"
-                        value="Enterprise IT Solutions &amp; Cloud"
+                        name="fi-text-purpose"
+                        value="Enterprise IT Solutions"
                         class="purpose-radio"
                       />
                       <span class="purpose-chip-content">
-                        <span class="purpose-text">Enterprise IT &bull; Cloud</span>
-                      </span>
-                    </label>
-
-                    <label class="purpose-chip" for="purpose_internship">
-                      <input
-                        type="radio"
-                        id="purpose_internship"
-                        name="payment_purpose"
-                        value="Professional Training &amp; Mentorship"
-                        class="purpose-radio"
-                      />
-                      <span class="purpose-chip-content">
-                        <span class="purpose-text">Training &bull; Mentorship Program</span>
+                        <span class="purpose-text">Enterprise IT Solutions</span>
                       </span>
                     </label>
 
@@ -328,18 +328,18 @@
                       <input
                         type="radio"
                         id="purpose_other"
-                        name="payment_purpose"
+                        name="fi-text-purpose"
                         value="Official Dues &amp; Corporate Service"
                         class="purpose-radio"
                       />
                       <span class="purpose-chip-content">
-                        <span class="purpose-text">Official Dues &bull; Corporate Fee</span>
+                        <span class="purpose-text">Official Dues &bull; Other</span>
                       </span>
                     </label>
                   </div>
                 </div>
 
-                <!-- Field 1: Name (Updated label per instruction) -->
+                <!-- Field 1: Name -->
                 <div class="form-group">
                   <label class="form-label" for="name">
                     Name <span class="required-star" aria-hidden="true">*</span>
@@ -347,7 +347,7 @@
                   <input
                     type="text"
                     id="name"
-                    name="name"
+                    name="fi-sender-fullName"
                     class="form-input"
                     placeholder="Enter your name"
                     autocomplete="name"
@@ -364,7 +364,7 @@
                   <input
                     type="tel"
                     id="phone"
-                    name="phone"
+                    name="fi-text-contactPhone"
                     class="form-input"
                     placeholder="01XXXXXXXXX"
                     autocomplete="tel"
@@ -372,41 +372,38 @@
                   <span class="field-error" id="error-phone" aria-live="polite"></span>
                 </div>
 
-                <!-- Field 3: Amount Paid (BDT) -->
-                <div class="form-group form-full">
+                <!-- Field 3: Amount (TK) -->
+                <div class="form-group">
                   <label class="form-label" for="amount">
-                    Amount Paid (BDT) <span class="required-star" aria-hidden="true">*</span>
+                    Amount (TK) <span class="required-star" aria-hidden="true">*</span>
                   </label>
-                  <div class="amount-row-container">
-                    <div class="amount-input-wrap">
-                      <span class="amount-prefix">৳</span>
-                      <input
-                        type="text"
-                        id="amount"
-                        name="amount"
-                        class="form-input amount-input"
-                        placeholder="e.g. 4000"
-                        required
-                      />
-                    </div>
-                    <div class="amount-presets" aria-label="Quick amount presets">
-                      <button type="button" class="preset-btn" data-preset="4000">4,000 BDT</button>
-                      <button type="button" class="preset-btn" data-preset="8000">8,000 BDT</button>
-                      <button type="button" class="preset-btn" data-preset="10000">10,000 BDT</button>
-                    </div>
+                  <div class="amount-input-wrap">
+                    <input
+                      type="text"
+                      id="amount"
+                      name="fi-text-amount"
+                      class="form-input amount-input"
+                      placeholder="e.g. 4000"
+                      required
+                    />
+                  </div>
+                  <div class="amount-presets" aria-label="Quick amount presets">
+                    <button type="button" class="preset-btn" data-preset="4000">4,000 TK</button>
+                    <button type="button" class="preset-btn" data-preset="8000">8,000 TK</button>
+                    <button type="button" class="preset-btn" data-preset="10000">10,000 TK</button>
                   </div>
                   <span class="field-error" id="error-amount" aria-live="polite"></span>
                 </div>
 
-                <!-- Field 4: Sender Number -->
-                <div class="form-group form-full">
+                <!-- Field 4: Sender Number (Restored per instruction) -->
+                <div class="form-group">
                   <label class="form-label" for="bkash_number">
                     <span id="sender-number-label-text">Sender bKash Number</span> <span class="required-star" aria-hidden="true">*</span>
                   </label>
                   <input
                     type="tel"
                     id="bkash_number"
-                    name="sender_number"
+                    name="fi-text-senderNumber"
                     class="form-input"
                     placeholder="01XXXXXXXXX"
                     maxlength="11"
@@ -426,7 +423,7 @@
                     <input
                       type="file"
                       id="payment_screenshot"
-                      name="payment_screenshot"
+                      name="fi-file-screenshot"
                       class="file-input-hidden"
                       accept="image/*,.pdf"
                       required
@@ -478,16 +475,16 @@
                   </label>
                   <textarea
                     id="notes"
-                    name="notes"
+                    name="fi-text-notes"
                     class="form-input form-textarea"
                     rows="2"
                     placeholder="Project name, invoice details, or additional remarks..."
                   ></textarea>
                 </div>
 
-                <!-- Hidden inputs for submission -->
-                <input type="hidden" name="payment_method" id="selected-payment-method" value="bKash"/>
-                <input type="hidden" name="recipient_number" id="hidden-recipient-number" value="01568924935"/>
+                <!-- Hidden inputs for Forminit -->
+                <input type="hidden" name="fi-text-paymentMethod" id="selected-payment-method" value="bKash"/>
+                <input type="hidden" name="fi-text-recipientNumber" id="hidden-recipient-number" value="01568924935"/>
 
                 <!-- Submit Button -->
                 <div class="form-group form-full" style="margin-top: 6px;">
@@ -503,7 +500,7 @@
             </form>
           </div>
 
-          <!-- Success State Card (Shown after successful SubmitKit submission) -->
+          <!-- Success State Card (Shown after successful Forminit submission) -->
           <div id="payment-success" class="payment-success-card" style="display: none; grid-column: 1 / -1; max-width: 620px; margin: 0 auto; width: 100%;">
             <div class="success-icon-wrap">
               <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

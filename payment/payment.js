@@ -2,8 +2,9 @@
  * Artois Technology Limited — Payment & Verification Interactive Controller
  * Dedicated script for /payment/
  *
- * Integrated with SubmitKit:
- * Endpoint: https://submitkit.dev/api/f/cmvrqqef60017spvgc5chwiax
+ * Integrated with Forminit:
+ * Endpoint: https://forminit.com/f/gmeqzhjt9jb
+ * Form ID: gmeqzhjt9jb
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,10 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const providerLogo = document.getElementById("provider-header-logo");
   const infoRecipientLabel = document.getElementById("info-recipient-label");
-  const senderNumberLabel = document.getElementById("sender-number-label-text");
-  const senderNumberInput = document.getElementById("bkash_number");
   const hiddenMethodInput = document.getElementById("selected-payment-method");
   const copyBkashBtn = document.getElementById("copy-bkash-btn");
+  const senderNumberLabelText = document.getElementById("sender-number-label-text");
+  const senderNumberInput = document.getElementById("bkash_number");
 
   let currentPaymentMethod = "bkash";
   const rawRecipientNumber = "01568924935";
@@ -50,14 +51,19 @@ document.addEventListener("DOMContentLoaded", () => {
       hiddenMethodInput.value = methodProperName;
     }
 
+    if (senderNumberLabelText) {
+      senderNumberLabelText.textContent = `Sender ${methodProperName} Number`;
+    }
+    if (senderNumberInput) {
+      senderNumberInput.placeholder = "01XXXXXXXXX";
+    }
+
     if (method === "rocket") {
       if (providerLogo) {
         providerLogo.src = "/assets/img/rocket-logo.png";
         providerLogo.alt = "Rocket Logo";
       }
       if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient Rocket Personal Number";
-      if (senderNumberLabel) senderNumberLabel.textContent = "Sender Rocket Number";
-      if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX";
       if (copyBkashBtn) copyBkashBtn.setAttribute("aria-label", "Copy Rocket number to clipboard");
     } else if (method === "nagad") {
       if (providerLogo) {
@@ -65,8 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
         providerLogo.alt = "Nagad Logo";
       }
       if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient Nagad Personal Number";
-      if (senderNumberLabel) senderNumberLabel.textContent = "Sender Nagad Number";
-      if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX";
       if (copyBkashBtn) copyBkashBtn.setAttribute("aria-label", "Copy Nagad number to clipboard");
     } else {
       if (providerLogo) {
@@ -74,8 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
         providerLogo.alt = "bKash Logo";
       }
       if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient bKash Personal Number";
-      if (senderNumberLabel) senderNumberLabel.textContent = "Sender bKash Number";
-      if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX";
       if (copyBkashBtn) copyBkashBtn.setAttribute("aria-label", "Copy bKash number to clipboard");
     }
   };
@@ -312,18 +314,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -------------------------------------------------------------------------
-  // 6. Form Validation & SubmitKit Submission
+  // 6. Form Validation & Forminit Submission
   // -------------------------------------------------------------------------
   const paymentForm = document.getElementById("payment-form");
   if (paymentForm) {
     const nameInput = document.getElementById("name");
     const phoneInput = document.getElementById("phone");
-    const bkashInput = document.getElementById("bkash_number");
+    const senderInput = document.getElementById("bkash_number");
 
     const errorName = document.getElementById("error-name");
     const errorPhone = document.getElementById("error-phone");
     const errorAmount = document.getElementById("error-amount");
-    const errorBkash = document.getElementById("error-bkash_number");
+    const errorSender = document.getElementById("error-bkash_number");
 
     const formErrorAlert = document.getElementById("form-error-alert");
     const submitBtn = document.getElementById("submit-btn");
@@ -351,7 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
       [nameInput, errorName],
       [phoneInput, errorPhone],
       [amountInput, errorAmount],
-      [bkashInput, errorBkash],
+      [senderInput, errorSender],
     ].forEach(([input, errorEl]) => {
       if (input) {
         input.addEventListener("input", () => {
@@ -390,36 +392,29 @@ document.addEventListener("DOMContentLoaded", () => {
       // 2. Amount check
       const amountVal = amountInput ? amountInput.value.trim().replace(/[^0-9.]/g, "") : "";
       if (!amountVal || isNaN(parseFloat(amountVal)) || parseFloat(amountVal) <= 0) {
-        showError(amountInput, errorAmount, "Please enter the amount paid in BDT.");
+        showError(amountInput, errorAmount, "Please enter the amount paid in TK.");
         isValid = false;
         if (!firstInvalid) firstInvalid = amountInput;
       } else {
         clearError(amountInput, errorAmount);
       }
 
-      // 3. Sender Number check (exactly 11 digits, numeric only)
-      const bkashVal = bkashInput ? bkashInput.value.trim() : "";
-      if (!bkashVal) {
-        showError(bkashInput, errorBkash, `Please enter your sender ${methodTitle} number.`);
+      // 3. Sender Number check
+      const senderVal = senderInput ? senderInput.value.trim() : "";
+      const bdPhoneRegex = /^01[3-9]\d{8}$/;
+      if (!senderVal) {
+        showError(senderInput, errorSender, `Please enter your sender ${methodTitle} number.`);
         isValid = false;
-        if (!firstInvalid) firstInvalid = bkashInput;
-      } else if (/\D/.test(bkashVal)) {
-        showError(bkashInput, errorBkash, "Only numeric digits are allowed (no spaces, dashes, or +880).");
+        if (!firstInvalid) firstInvalid = senderInput;
+      } else if (!bdPhoneRegex.test(senderVal.replace(/[-\s]/g, ""))) {
+        showError(senderInput, errorSender, `Please enter a valid 11-digit ${methodTitle} number (e.g. 01XXXXXXXXX).`);
         isValid = false;
-        if (!firstInvalid) firstInvalid = bkashInput;
-      } else if (bkashVal.length !== 11) {
-        showError(bkashInput, errorBkash, `${methodTitle} number must contain exactly 11 digits (e.g. 01712345678).`);
-        isValid = false;
-        if (!firstInvalid) firstInvalid = bkashInput;
-      } else if (!bkashVal.startsWith("01")) {
-        showError(bkashInput, errorBkash, `${methodTitle} number must start with 01 (e.g. 01712345678).`);
-        isValid = false;
-        if (!firstInvalid) firstInvalid = bkashInput;
+        if (!firstInvalid) firstInvalid = senderInput;
       } else {
-        clearError(bkashInput, errorBkash);
+        clearError(senderInput, errorSender);
       }
 
-      // 4. Payment Screenshot check
+      // 4. Payment Screenshot check (SS has all transfer details)
       const file = fileInput && fileInput.files ? fileInput.files[0] : null;
       if (!file) {
         if (errorScreenshot) {
@@ -445,7 +440,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Submit to SubmitKit endpoint
+      // Submit to Forminit endpoint
       const originalBtnHtml = submitBtn.innerHTML;
       submitBtn.disabled = true;
       submitBtn.innerHTML = `
@@ -458,7 +453,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         const formData = new FormData(paymentForm);
-        const endpoint = paymentForm.action || "https://submitkit.dev/api/f/cmvrqqef60017spvgc5chwiax";
+        const endpoint = paymentForm.action || "https://forminit.com/f/gmeqzhjt9jb";
 
         const response = await fetch(endpoint, {
           method: "POST",
@@ -484,8 +479,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (successName) successName.textContent = nameVal;
           if (successMethod) successMethod.textContent = `${methodTitle} (Send Money)`;
-          if (successAmount) successAmount.textContent = `${amountVal} BDT`;
-          if (successSender) successSender.textContent = bkashVal;
+          if (successAmount) successAmount.textContent = `${amountVal} TK`;
+          if (successSender) successSender.textContent = senderVal;
 
           if (formCard) formCard.style.display = "none";
           if (successCard) {

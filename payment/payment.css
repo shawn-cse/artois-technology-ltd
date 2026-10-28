@@ -562,49 +562,33 @@
 }
 
 /* Amount Row & Quick Presets */
-.amount-row-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
 .amount-input-wrap {
   position: relative;
   display: flex;
   align-items: center;
-  flex: 1;
-  min-width: 140px;
-}
-
-.amount-prefix {
-  position: absolute;
-  left: 14px;
-  font-size: 1.18rem;
-  font-weight: 800;
-  color: var(--text-muted);
-  pointer-events: none;
+  width: 100%;
 }
 
 .amount-input {
-  padding-left: 32px !important;
   font-weight: 800;
   font-size: 1.05rem;
   font-family: 'Outfit', 'Inter', sans-serif;
+  letter-spacing: 0.02em;
 }
 
 .amount-presets {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
+  margin-top: 6px;
 }
 
 .preset-btn {
   background: #ffffff;
   border: 1.5px solid var(--border-strong);
   border-radius: var(--radius-xs);
-  padding: 7px 13px;
-  font-size: 0.8rem;
+  padding: 6px 12px;
+  font-size: 0.78rem;
   font-weight: 800;
   color: var(--ink-800);
   cursor: pointer;
