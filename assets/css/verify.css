@@ -286,20 +286,19 @@ body::before {
   grid-column: 1 / -1;
 }
 
-/* Status indicators */
+/* Status indicators — Clean, Corporate, High-Contrast */
 .status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-weight: 700 !important;
+  display: inline-block;
+  font-weight: 650 !important;
+  color: var(--ink) !important;
 }
 
 .status-pill.active {
-  color: var(--brand) !important;
+  color: var(--ink) !important;
 }
 
 .status-pill.completed {
-  color: var(--success) !important;
+  color: var(--ink) !important;
 }
 
 .status-pill.declined,
@@ -307,22 +306,6 @@ body::before {
 .status-pill.inactive {
   color: #dc2626 !important;
 }
-
-.status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: currentColor;
-  flex-shrink: 0;
-}
-
-.status-pill.active .status-dot {
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
-  animation: pulse-dot 2.2s infinite;
-}
-
-.status-pill.completed .status-dot {
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
 }
 
 .status-pill.declined .status-dot,

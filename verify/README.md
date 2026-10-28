@@ -23,3 +23,8 @@ https://www.artoistechnologyltd.com/verify/rohan-vfy-9r2m5k8w-41m6p3sc-7v0j4q2h-
 ### Hamida Akhter
 
 https://www.artoistechnologyltd.com/verify/hamida-vfy-5h2k8m4r-71t6w3qb-9p0v2x8e-j5h9s3ld/
+
+### Md. Fahad Hassan Joy
+
+https://www.artoistechnologyltd.com/verify/fahad-vfy-2f8k7w4t-63m1p9rc-5v0j8q4h-d9n2e6sl/
+
