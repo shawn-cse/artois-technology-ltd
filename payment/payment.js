@@ -19,13 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleRocketLabel = document.getElementById("toggle-rocket");
 
   const providerLogo = document.getElementById("provider-header-logo");
-  const infoMethodVal = document.getElementById("info-method-val");
   const infoRecipientLabel = document.getElementById("info-recipient-label");
-  const badgeMethodText = document.getElementById("badge-method-text");
-  const instructionTitle = document.getElementById("instruction-title");
-  const step1 = document.getElementById("instruction-step-1");
-  const step5 = document.getElementById("instruction-step-5");
-  const instructionNote = document.getElementById("instruction-note");
   const senderNumberLabel = document.getElementById("sender-number-label-text");
   const senderNumberInput = document.getElementById("bkash_number");
   const trxidLabel = document.getElementById("trxid-label-text");
@@ -62,21 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
         providerLogo.src = "/assets/img/rocket-logo.png";
         providerLogo.alt = "Rocket Logo";
       }
-      if (infoMethodVal) infoMethodVal.textContent = "Rocket Send Money";
-      if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient Rocket Personal Number";
-      if (badgeMethodText) badgeMethodText.textContent = "Send Money";
-      if (instructionTitle) instructionTitle.textContent = "How to Send Money via Rocket:";
-      if (step1) {
-        step1.innerHTML = `<span class="step-num">1</span><span>Open your <strong>Rocket App</strong> or dial <strong>*322#</strong>.</span>`;
-      }
-      if (step5) {
-        step5.innerHTML = `<span class="step-num">5</span><span><strong>Important:</strong> Copy the <strong>Transaction ID (TrxID)</strong> and take a <strong>Screenshot (SS)</strong> of the payment success screen.</span>`;
-      }
-      if (instructionNote) {
-        instructionNote.innerHTML = `<strong>Notice:</strong> Please make a direct <strong>Send Money</strong> to the Rocket personal number above. Merchant Payment or Cash Out cannot be processed automatically.`;
-      }
+      if (infoRecipientLabel) infoRecipientLabel.textContent = "Rocket Personal Number";
       if (senderNumberLabel) senderNumberLabel.textContent = "Sender Rocket Number";
-      if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX (Rocket Number)";
+      if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX";
       if (trxidLabel) trxidLabel.textContent = "Rocket TrxID";
       if (copyBkashBtn) copyBkashBtn.setAttribute("aria-label", "Copy Rocket number to clipboard");
     } else if (method === "nagad") {
@@ -84,21 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
         providerLogo.src = "/assets/img/nagad-logo.png";
         providerLogo.alt = "Nagad Logo";
       }
-      if (infoMethodVal) infoMethodVal.textContent = "Nagad Send Money";
-      if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient Nagad Personal Number";
-      if (badgeMethodText) badgeMethodText.textContent = "Send Money";
-      if (instructionTitle) instructionTitle.textContent = "How to Send Money via Nagad:";
-      if (step1) {
-        step1.innerHTML = `<span class="step-num">1</span><span>Open your <strong>Nagad App</strong> or dial <strong>*167#</strong>.</span>`;
-      }
-      if (step5) {
-        step5.innerHTML = `<span class="step-num">5</span><span><strong>Important:</strong> Copy the <strong>Transaction ID (TrxID)</strong> and take a <strong>Screenshot (SS)</strong> of the payment success screen.</span>`;
-      }
-      if (instructionNote) {
-        instructionNote.innerHTML = `<strong>Notice:</strong> Please make a direct <strong>Send Money</strong> to the Nagad personal number above. Merchant Payment or Cash Out cannot be processed automatically.`;
-      }
+      if (infoRecipientLabel) infoRecipientLabel.textContent = "Nagad Personal Number";
       if (senderNumberLabel) senderNumberLabel.textContent = "Sender Nagad Number";
-      if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX (Nagad Number)";
+      if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX";
       if (trxidLabel) trxidLabel.textContent = "Nagad TrxID";
       if (copyBkashBtn) copyBkashBtn.setAttribute("aria-label", "Copy Nagad number to clipboard");
     } else {
@@ -106,21 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
         providerLogo.src = "/assets/img/bkash-logo.png";
         providerLogo.alt = "bKash Logo";
       }
-      if (infoMethodVal) infoMethodVal.textContent = "bKash Send Money";
-      if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient bKash Personal Number";
-      if (badgeMethodText) badgeMethodText.textContent = "Send Money";
-      if (instructionTitle) instructionTitle.textContent = "How to Send Money via bKash:";
-      if (step1) {
-        step1.innerHTML = `<span class="step-num">1</span><span>Open your <strong>bKash App</strong> or dial <strong>*247#</strong>.</span>`;
-      }
-      if (step5) {
-        step5.innerHTML = `<span class="step-num">5</span><span><strong>Important:</strong> Copy the <strong>Transaction ID (TrxID)</strong> and take a <strong>Screenshot (SS)</strong> of the payment success screen.</span>`;
-      }
-      if (instructionNote) {
-        instructionNote.innerHTML = `<strong>Notice:</strong> Please make a direct <strong>Send Money</strong> to the bKash personal number above. Merchant Payment or Cash Out cannot be processed automatically.`;
-      }
+      if (infoRecipientLabel) infoRecipientLabel.textContent = "bKash Personal Number";
       if (senderNumberLabel) senderNumberLabel.textContent = "Sender bKash Number";
-      if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX (bKash Number)";
+      if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX";
       if (trxidLabel) trxidLabel.textContent = "bKash TrxID";
       if (copyBkashBtn) copyBkashBtn.setAttribute("aria-label", "Copy bKash number to clipboard");
     }
@@ -241,137 +199,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -------------------------------------------------------------------------
-  // 5. File Upload Handling & Live Image Preview (SS of Payment)
-  // -------------------------------------------------------------------------
-  const fileDropZone = document.getElementById("file-drop-zone");
-  const fileInput = document.getElementById("payment_screenshot");
-  const filePrompt = document.getElementById("file-zone-prompt");
-  const filePreviewCard = document.getElementById("file-preview-card");
-  const filePreviewThumb = document.getElementById("file-preview-thumb");
-  const fileDocIcon = document.getElementById("file-preview-doc-icon");
-  const filePreviewName = document.getElementById("file-preview-name");
-  const filePreviewSize = document.getElementById("file-preview-size");
-  const fileRemoveBtn = document.getElementById("file-remove-btn");
-  const errorScreenshot = document.getElementById("error-screenshot");
-
-  const formatFileSize = (bytes) => {
-    if (bytes === 0) return "0 Bytes";
-    const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
-  };
-
-  const handleSelectedFile = (file) => {
-    if (!file) return;
-
-    // Check size (max 10MB)
-    const maxBytes = 10 * 1024 * 1024;
-    if (file.size > maxBytes) {
-      if (errorScreenshot) {
-        errorScreenshot.textContent = "File exceeds 10MB limit. Please upload a smaller screenshot.";
-        errorScreenshot.classList.add("active");
-      }
-      resetFileUpload();
-      return;
-    }
-
-    if (errorScreenshot) {
-      errorScreenshot.textContent = "";
-      errorScreenshot.classList.remove("active");
-    }
-
-    if (filePreviewName) filePreviewName.textContent = file.name;
-    if (filePreviewSize) filePreviewSize.textContent = formatFileSize(file.size);
-
-    if (file.type.startsWith("image/")) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        if (filePreviewThumb) {
-          filePreviewThumb.src = e.target.result;
-          filePreviewThumb.style.display = "block";
-        }
-        if (fileDocIcon) fileDocIcon.style.display = "none";
-      };
-      reader.readAsDataURL(file);
-    } else {
-      if (filePreviewThumb) filePreviewThumb.style.display = "none";
-      if (fileDocIcon) fileDocIcon.style.display = "flex";
-    }
-
-    if (filePrompt) filePrompt.style.display = "none";
-    if (filePreviewCard) filePreviewCard.style.display = "flex";
-    if (fileDropZone) fileDropZone.classList.add("has-file");
-  };
-
-  const resetFileUpload = () => {
-    if (fileInput) fileInput.value = "";
-    if (filePreviewThumb) filePreviewThumb.src = "";
-    if (filePrompt) filePrompt.style.display = "flex";
-    if (filePreviewCard) filePreviewCard.style.display = "none";
-    if (fileDropZone) fileDropZone.classList.remove("has-file");
-  };
-
-  if (fileDropZone && fileInput) {
-    // Click on dropzone opens native file picker
-    fileDropZone.addEventListener("click", (e) => {
-      if (e.target.closest("#file-remove-btn")) return;
-      fileInput.click();
-    });
-
-    fileInput.addEventListener("change", () => {
-      if (fileInput.files && fileInput.files[0]) {
-        handleSelectedFile(fileInput.files[0]);
-      }
-    });
-
-    // Drag and Drop
-    ["dragenter", "dragover"].forEach((eventName) => {
-      fileDropZone.addEventListener(eventName, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        fileDropZone.classList.add("drag-over");
-      });
-    });
-
-    ["dragleave", "drop"].forEach((eventName) => {
-      fileDropZone.addEventListener(eventName, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        fileDropZone.classList.remove("drag-over");
-      });
-    });
-
-    fileDropZone.addEventListener("drop", (e) => {
-      const dt = e.dataTransfer;
-      if (dt && dt.files && dt.files[0]) {
-        fileInput.files = dt.files;
-        handleSelectedFile(dt.files[0]);
-      }
-    });
-  }
-
-  if (fileRemoveBtn) {
-    fileRemoveBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      resetFileUpload();
-      if (fileInput) fileInput.click();
-    });
-  }
-
-  // -------------------------------------------------------------------------
-  // 6. Form Validation & SubmitKit Submission
+  // 5. Form Validation & SubmitKit Submission
   // -------------------------------------------------------------------------
   const paymentForm = document.getElementById("payment-form");
   if (paymentForm) {
     const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
     const phoneInput = document.getElementById("phone");
     const bkashInput = document.getElementById("bkash_number");
     const trxidInput = document.getElementById("trxid");
 
     const errorName = document.getElementById("error-name");
-    const errorEmail = document.getElementById("error-email");
     const errorPhone = document.getElementById("error-phone");
     const errorAmount = document.getElementById("error-amount");
     const errorBkash = document.getElementById("error-bkash_number");
@@ -401,7 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Real-time error clearing on input
     [
       [nameInput, errorName],
-      [emailInput, errorEmail],
       [phoneInput, errorPhone],
       [amountInput, errorAmount],
       [bkashInput, errorBkash],
@@ -414,8 +250,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     });
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     paymentForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -443,21 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clearError(nameInput, errorName);
       }
 
-      // 2. Email Address check
-      const emailVal = emailInput ? emailInput.value.trim() : "";
-      if (!emailVal) {
-        showError(emailInput, errorEmail, "Please enter your email address.");
-        isValid = false;
-        if (!firstInvalid) firstInvalid = emailInput;
-      } else if (!emailRegex.test(emailVal)) {
-        showError(emailInput, errorEmail, "Please enter a valid email address (e.g. name@example.com).");
-        isValid = false;
-        if (!firstInvalid) firstInvalid = emailInput;
-      } else {
-        clearError(emailInput, errorEmail);
-      }
-
-      // 3. Amount check
+      // 2. Amount check
       const amountVal = amountInput ? amountInput.value.trim().replace(/[^0-9.]/g, "") : "";
       if (!amountVal || isNaN(parseFloat(amountVal)) || parseFloat(amountVal) <= 0) {
         showError(amountInput, errorAmount, "Please enter the amount paid in BDT.");
@@ -467,7 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clearError(amountInput, errorAmount);
       }
 
-      // 4. Sender Number check (exactly 11 digits, numeric only)
+      // 3. Sender Number check (exactly 11 digits, numeric only)
       const bkashVal = bkashInput ? bkashInput.value.trim() : "";
       if (!bkashVal) {
         showError(bkashInput, errorBkash, `Please enter your sender ${methodTitle} number.`);
@@ -478,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
         isValid = false;
         if (!firstInvalid) firstInvalid = bkashInput;
       } else if (bkashVal.length !== 11) {
-        showError(bkashInput, errorBkash, `${methodTitle} number must contain exactly 11 digits (you entered ${bkashVal.length} digits).`);
+        showError(bkashInput, errorBkash, `${methodTitle} number must contain exactly 11 digits (e.g. 01712345678).`);
         isValid = false;
         if (!firstInvalid) firstInvalid = bkashInput;
       } else if (!bkashVal.startsWith("01")) {
@@ -489,7 +309,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clearError(bkashInput, errorBkash);
       }
 
-      // 5. Transaction ID check
+      // 4. Transaction ID check
       const trxidVal = trxidInput ? trxidInput.value.trim() : "";
       if (!trxidVal) {
         showError(trxidInput, errorTrxid, `Please enter your ${methodTitle} Transaction ID (TrxID).`);
@@ -501,24 +321,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!firstInvalid) firstInvalid = trxidInput;
       } else {
         clearError(trxidInput, errorTrxid);
-      }
-
-      // 6. Screenshot Upload check
-      const file = fileInput && fileInput.files ? fileInput.files[0] : null;
-      if (!file) {
-        if (errorScreenshot) {
-          errorScreenshot.textContent = "Please attach a screenshot (SS) or proof of your completed payment.";
-          errorScreenshot.classList.add("active");
-        }
-        isValid = false;
-        if (!firstInvalid && fileDropZone) {
-          fileDropZone.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-      } else {
-        if (errorScreenshot) {
-          errorScreenshot.textContent = "";
-          errorScreenshot.classList.remove("active");
-        }
       }
 
       if (!isValid) {
@@ -558,20 +360,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (response.ok || (data && (data.ok === true || data.success === true))) {
           // Populate summary card
+          const successName = document.getElementById("success-name");
           const successTrxid = document.getElementById("success-trxid");
           const successMethod = document.getElementById("success-method");
           const successAmount = document.getElementById("success-amount");
-          const successSubId = document.getElementById("success-sub-id");
-          const subIdRow = document.getElementById("submission-id-row");
 
+          if (successName) successName.textContent = nameVal;
           if (successTrxid) successTrxid.textContent = trxidVal.toUpperCase();
-          if (successMethod) successMethod.textContent = `${methodTitle} (Personal Send Money)`;
+          if (successMethod) successMethod.textContent = `${methodTitle} (Send Money)`;
           if (successAmount) successAmount.textContent = `${amountVal} BDT`;
-
-          if (data && data.submissionId && successSubId && subIdRow) {
-            successSubId.textContent = data.submissionId;
-            subIdRow.style.display = "flex";
-          }
 
           if (formCard) formCard.style.display = "none";
           if (successCard) {
@@ -602,7 +399,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (resetBtn) {
       resetBtn.addEventListener("click", () => {
         paymentForm.reset();
-        resetFileUpload();
+        presetButtons.forEach((b) => b.classList.remove("is-active"));
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = `
