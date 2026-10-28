@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const infoRecipientLabel = document.getElementById("info-recipient-label");
   const senderNumberLabel = document.getElementById("sender-number-label-text");
   const senderNumberInput = document.getElementById("bkash_number");
-  const trxidLabel = document.getElementById("trxid-label-text");
   const hiddenMethodInput = document.getElementById("selected-payment-method");
   const copyBkashBtn = document.getElementById("copy-bkash-btn");
 
@@ -56,30 +55,27 @@ document.addEventListener("DOMContentLoaded", () => {
         providerLogo.src = "/assets/img/rocket-logo.png";
         providerLogo.alt = "Rocket Logo";
       }
-      if (infoRecipientLabel) infoRecipientLabel.textContent = "Rocket Personal Number";
+      if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient Rocket Personal Number";
       if (senderNumberLabel) senderNumberLabel.textContent = "Sender Rocket Number";
       if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX";
-      if (trxidLabel) trxidLabel.textContent = "Rocket TrxID";
       if (copyBkashBtn) copyBkashBtn.setAttribute("aria-label", "Copy Rocket number to clipboard");
     } else if (method === "nagad") {
       if (providerLogo) {
         providerLogo.src = "/assets/img/nagad-logo.png";
         providerLogo.alt = "Nagad Logo";
       }
-      if (infoRecipientLabel) infoRecipientLabel.textContent = "Nagad Personal Number";
+      if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient Nagad Personal Number";
       if (senderNumberLabel) senderNumberLabel.textContent = "Sender Nagad Number";
       if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX";
-      if (trxidLabel) trxidLabel.textContent = "Nagad TrxID";
       if (copyBkashBtn) copyBkashBtn.setAttribute("aria-label", "Copy Nagad number to clipboard");
     } else {
       if (providerLogo) {
         providerLogo.src = "/assets/img/bkash-logo.png";
         providerLogo.alt = "bKash Logo";
       }
-      if (infoRecipientLabel) infoRecipientLabel.textContent = "bKash Personal Number";
+      if (infoRecipientLabel) infoRecipientLabel.textContent = "Recipient bKash Personal Number";
       if (senderNumberLabel) senderNumberLabel.textContent = "Sender bKash Number";
       if (senderNumberInput) senderNumberInput.placeholder = "01XXXXXXXXX";
-      if (trxidLabel) trxidLabel.textContent = "bKash TrxID";
       if (copyBkashBtn) copyBkashBtn.setAttribute("aria-label", "Copy bKash number to clipboard");
     }
   };
@@ -199,20 +195,135 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -------------------------------------------------------------------------
-  // 5. Form Validation & SubmitKit Submission
+  // 5. Payment Screenshot Upload Box & Live Preview
+  // -------------------------------------------------------------------------
+  const fileDropZone = document.getElementById("file-drop-zone");
+  const fileInput = document.getElementById("payment_screenshot");
+  const filePrompt = document.getElementById("file-zone-prompt");
+  const filePreviewCard = document.getElementById("file-preview-card");
+  const filePreviewThumb = document.getElementById("file-preview-thumb");
+  const fileDocIcon = document.getElementById("file-preview-doc-icon");
+  const filePreviewName = document.getElementById("file-preview-name");
+  const filePreviewSize = document.getElementById("file-preview-size");
+  const fileRemoveBtn = document.getElementById("file-remove-btn");
+  const errorScreenshot = document.getElementById("error-screenshot");
+
+  const formatFileSize = (bytes) => {
+    if (bytes === 0) return "0 Bytes";
+    const k = 1024;
+    const sizes = ["Bytes", "KB", "MB", "GB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
+  };
+
+  const handleSelectedFile = (file) => {
+    if (!file) return;
+
+    // Check size (max 10MB)
+    const maxBytes = 10 * 1024 * 1024;
+    if (file.size > maxBytes) {
+      if (errorScreenshot) {
+        errorScreenshot.textContent = "File exceeds 10MB limit. Please upload a smaller screenshot.";
+        errorScreenshot.classList.add("active");
+      }
+      resetFileUpload();
+      return;
+    }
+
+    if (errorScreenshot) {
+      errorScreenshot.textContent = "";
+      errorScreenshot.classList.remove("active");
+    }
+
+    if (filePreviewName) filePreviewName.textContent = file.name;
+    if (filePreviewSize) filePreviewSize.textContent = formatFileSize(file.size);
+
+    if (file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (filePreviewThumb) {
+          filePreviewThumb.src = e.target.result;
+          filePreviewThumb.style.display = "block";
+        }
+        if (fileDocIcon) fileDocIcon.style.display = "none";
+      };
+      reader.readAsDataURL(file);
+    } else {
+      if (filePreviewThumb) filePreviewThumb.style.display = "none";
+      if (fileDocIcon) fileDocIcon.style.display = "flex";
+    }
+
+    if (filePrompt) filePrompt.style.display = "none";
+    if (filePreviewCard) filePreviewCard.style.display = "flex";
+    if (fileDropZone) fileDropZone.classList.add("has-file");
+  };
+
+  const resetFileUpload = () => {
+    if (fileInput) fileInput.value = "";
+    if (filePreviewThumb) filePreviewThumb.src = "";
+    if (filePrompt) filePrompt.style.display = "flex";
+    if (filePreviewCard) filePreviewCard.style.display = "none";
+    if (fileDropZone) fileDropZone.classList.remove("has-file");
+  };
+
+  if (fileDropZone && fileInput) {
+    fileDropZone.addEventListener("click", (e) => {
+      if (e.target.closest("#file-remove-btn")) return;
+      fileInput.click();
+    });
+
+    fileInput.addEventListener("change", () => {
+      if (fileInput.files && fileInput.files[0]) {
+        handleSelectedFile(fileInput.files[0]);
+      }
+    });
+
+    ["dragenter", "dragover"].forEach((eventName) => {
+      fileDropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fileDropZone.classList.add("drag-over");
+      });
+    });
+
+    ["dragleave", "drop"].forEach((eventName) => {
+      fileDropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fileDropZone.classList.remove("drag-over");
+      });
+    });
+
+    fileDropZone.addEventListener("drop", (e) => {
+      const dt = e.dataTransfer;
+      if (dt && dt.files && dt.files[0]) {
+        fileInput.files = dt.files;
+        handleSelectedFile(dt.files[0]);
+      }
+    });
+  }
+
+  if (fileRemoveBtn) {
+    fileRemoveBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      resetFileUpload();
+      if (fileInput) fileInput.click();
+    });
+  }
+
+  // -------------------------------------------------------------------------
+  // 6. Form Validation & SubmitKit Submission
   // -------------------------------------------------------------------------
   const paymentForm = document.getElementById("payment-form");
   if (paymentForm) {
     const nameInput = document.getElementById("name");
     const phoneInput = document.getElementById("phone");
     const bkashInput = document.getElementById("bkash_number");
-    const trxidInput = document.getElementById("trxid");
 
     const errorName = document.getElementById("error-name");
     const errorPhone = document.getElementById("error-phone");
     const errorAmount = document.getElementById("error-amount");
     const errorBkash = document.getElementById("error-bkash_number");
-    const errorTrxid = document.getElementById("error-trxid");
 
     const formErrorAlert = document.getElementById("form-error-alert");
     const submitBtn = document.getElementById("submit-btn");
@@ -241,7 +352,6 @@ document.addEventListener("DOMContentLoaded", () => {
       [phoneInput, errorPhone],
       [amountInput, errorAmount],
       [bkashInput, errorBkash],
-      [trxidInput, errorTrxid],
     ].forEach(([input, errorEl]) => {
       if (input) {
         input.addEventListener("input", () => {
@@ -263,10 +373,10 @@ document.addEventListener("DOMContentLoaded", () => {
       let firstInvalid = null;
       const methodTitle = currentPaymentMethod === "rocket" ? "Rocket" : (currentPaymentMethod === "nagad" ? "Nagad" : "bKash");
 
-      // 1. Full Name check
+      // 1. Name check
       const nameVal = nameInput ? nameInput.value.trim() : "";
       if (!nameVal) {
-        showError(nameInput, errorName, "Please enter your full name.");
+        showError(nameInput, errorName, "Please enter your name.");
         isValid = false;
         if (!firstInvalid) firstInvalid = nameInput;
       } else if (nameVal.length < 2) {
@@ -309,22 +419,29 @@ document.addEventListener("DOMContentLoaded", () => {
         clearError(bkashInput, errorBkash);
       }
 
-      // 4. Transaction ID check
-      const trxidVal = trxidInput ? trxidInput.value.trim() : "";
-      if (!trxidVal) {
-        showError(trxidInput, errorTrxid, `Please enter your ${methodTitle} Transaction ID (TrxID).`);
+      // 4. Payment Screenshot check
+      const file = fileInput && fileInput.files ? fileInput.files[0] : null;
+      if (!file) {
+        if (errorScreenshot) {
+          errorScreenshot.textContent = "Please attach your payment screenshot or confirmation receipt.";
+          errorScreenshot.classList.add("active");
+        }
         isValid = false;
-        if (!firstInvalid) firstInvalid = trxidInput;
-      } else if (trxidVal.length < 5) {
-        showError(trxidInput, errorTrxid, `Please enter a valid TrxID (at least 6 characters).`);
-        isValid = false;
-        if (!firstInvalid) firstInvalid = trxidInput;
+        if (!firstInvalid && fileDropZone) {
+          firstInvalid = fileDropZone;
+          fileDropZone.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
       } else {
-        clearError(trxidInput, errorTrxid);
+        if (errorScreenshot) {
+          errorScreenshot.textContent = "";
+          errorScreenshot.classList.remove("active");
+        }
       }
 
       if (!isValid) {
-        if (firstInvalid) firstInvalid.focus();
+        if (firstInvalid && typeof firstInvalid.focus === "function") {
+          firstInvalid.focus();
+        }
         return;
       }
 
@@ -361,14 +478,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response.ok || (data && (data.ok === true || data.success === true))) {
           // Populate summary card
           const successName = document.getElementById("success-name");
-          const successTrxid = document.getElementById("success-trxid");
           const successMethod = document.getElementById("success-method");
           const successAmount = document.getElementById("success-amount");
+          const successSender = document.getElementById("success-sender");
 
           if (successName) successName.textContent = nameVal;
-          if (successTrxid) successTrxid.textContent = trxidVal.toUpperCase();
           if (successMethod) successMethod.textContent = `${methodTitle} (Send Money)`;
           if (successAmount) successAmount.textContent = `${amountVal} BDT`;
+          if (successSender) successSender.textContent = bkashVal;
 
           if (formCard) formCard.style.display = "none";
           if (successCard) {
@@ -399,6 +516,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (resetBtn) {
       resetBtn.addEventListener("click", () => {
         paymentForm.reset();
+        resetFileUpload();
         presetButtons.forEach((b) => b.classList.remove("is-active"));
         if (submitBtn) {
           submitBtn.disabled = false;
